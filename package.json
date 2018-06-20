@@ -1,0 +1,50 @@
+{
+  "name": "polyfill-io-aot",
+  "version": "0.0.0",
+  "description": "Combines sources from the polyfill-service package",
+  "main": "index.js",
+  "scripts": {
+    "reinstall": "rm -rf node_modules yarn.lock && yarn install && git add yarn.lock",
+    "sync-dep-versions": "node build/sync-dependency-versions.js",
+    "sync-pkg-fields": "node build/sync-package-fields.js",
+    "sync": "yarn run sync-pkg-fields && yarn run sync-dep-versions",
+    "prepare": "yarn run sync",
+    "clean": "node build/clean.js",
+    "pretsc": "yarn run clean",
+    "tsc": "tsc",
+    "tsc:watch": "yarn run tsc --watch"
+  },
+  "author": "Alorel <a.molcanovas@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/bluebird": "^3.5.20",
+    "@types/cross-spawn": "^6.0.0",
+    "@types/debug": "^0.0.30",
+    "@types/fs-extra": "^5.0.2",
+    "@types/glob": "^5.0.35",
+    "@types/lodash": "^4.14.109",
+    "@types/node": "^10.1.2",
+    "@types/semver": "^5.5.0",
+    "bluebird": "^3.5.1",
+    "cross-spawn": "^6.0.5",
+    "custom-tslint-formatters": "^2.3.0",
+    "debug": "^3.1.0",
+    "fs-extra": "^6.0.1",
+    "glob": "^7.1.2",
+    "lodash": "^4.17.10",
+    "polyfill-service": "^3.25.1",
+    "semver": "^5.5.0",
+    "ts-node": "^6.0.3",
+    "tslint": "^5.10.0",
+    "typescript": "^2.8.3",
+    "typescript-lazy-get-decorator": "^1.2.0"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "repository": "git@github.com:Alorel/polyfill.io-aot.git",
+  "private": true,
+  "dependencies": {
+    "tslib": "^1.9.1"
+  }
+}
