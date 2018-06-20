@@ -4,15 +4,7 @@
   "description": "Combines sources from the polyfill-service package",
   "main": "index.js",
   "scripts": {
-    "reinstall": "rm -rf node_modules yarn.lock && yarn install && git add yarn.lock",
-    "sync-dep-versions": "node build/sync-dependency-versions.js",
-    "sync-pkg-fields": "node build/sync-package-fields.js",
-    "sync": "yarn run sync-pkg-fields && yarn run sync-dep-versions",
-    "prepare": "yarn run sync",
-    "clean": "node build/clean.js",
-    "pretsc": "yarn run clean",
-    "tsc": "tsc",
-    "tsc:watch": "yarn run tsc --watch"
+
   },
   "author": "Alorel <a.molcanovas@gmail.com>",
   "license": "MIT",
