@@ -1,4 +1,9 @@
 language: node_js
-node_js: stable
-install: true
+node_js: lts/carbon
 script: echo PH
+before_install: npm i -g yarn
+before_cache: rm -rf node_modules/.cache
+cache:
+  yarn: true
+  directories:
+    - node_modules
