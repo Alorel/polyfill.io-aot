@@ -19,29 +19,7 @@ class WritePolyfillCombinationsExecutor extends PoolExecutor {
 
         return this.builder[COMBO_HASHES];
       })
-      .map((hash: string) => {
-        const uaString: string = this.builder[COMBO_HASH_UA_MAP][hash];
-        this.emit(BuildEvent.GENERATE_BUNDLE_BEGIN, uaString);
-
-        return this
-          ._wrap(this._pool.exec('generate', [
-            this.conf.excludes,
-            JSON.stringify(this.builder[COMBO_MAP].get(hash), replacer),
-            this.builder[COMBO_HASH_UA_MAP][hash],
-            this.conf.unknown,
-            this.conf.outDir,
-            hash
-          ]))
-          .then(() => {
-            this.emit(BuildEvent.GENERATE_BUNDLE_OK, uaString);
-            this._ora.text = `Generated bundle for ${uaString}`;
-          })
-          .catch((e: Error) => {
-            this.emit(BuildEvent.GENERATE_BUNDLE_ERR, uaString, e);
-
-            throw e;
-          });
-      })
+      .map(this.mapper.bind(this))
       .then(
         () => {
           this.emit(BuildEvent.GENERATE_BUNDLES_OK);
@@ -54,6 +32,30 @@ class WritePolyfillCombinationsExecutor extends PoolExecutor {
       )
       .finally(() => {
         this._terminate().catch(noop);
+      });
+  }
+
+  private mapper(hash: string): Bluebird<void> {
+    const uaString: string = this.builder[COMBO_HASH_UA_MAP][hash];
+    this.emit(BuildEvent.GENERATE_BUNDLE_BEGIN, uaString);
+
+    return this
+      ._wrap(this._pool.exec('generate', [
+        this.conf.excludes,
+        JSON.stringify(this.builder[COMBO_MAP].get(hash), replacer),
+        this.builder[COMBO_HASH_UA_MAP][hash],
+        this.conf.unknown,
+        this.conf.outDir,
+        hash
+      ]))
+      .then(() => {
+        this.emit(BuildEvent.GENERATE_BUNDLE_OK, uaString);
+        this._ora.text = `Generated bundle for ${uaString}`;
+      })
+      .catch((e: Error) => {
+        this.emit(BuildEvent.GENERATE_BUNDLE_ERR, uaString, e);
+
+        throw e;
       });
   }
 }

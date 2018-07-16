@@ -7,6 +7,8 @@ import {Executor} from '../Executor';
 import {BuildEvent} from '../interfaces/BuildEvent';
 import {COPY_DIRS, COPY_FILES} from '../symbols';
 
+type Reducer = (acc: CopyPath[], dir: string) => Promise<CopyPath[]>;
+
 /** @internal */
 class FormatSourceDirsExecutor extends Executor {
 
@@ -16,53 +18,10 @@ class FormatSourceDirsExecutor extends Executor {
     const out: CopyPath[] = [];
     const extraCopies$: CopyPath[] = [];
 
-    const createReducer = (root: string): (acc: CopyPath[], dir: string) => Promise<CopyPath[]> => {
-      const reducer = async(acc: CopyPath[], dir: string): Promise<CopyPath[]> => {
-        try {
-          dir = resolve(dir);
-          this.emit(BuildEvent.FORMAT_DIR_BEGIN, dir);
-
-          let hasSubdirs = false;
-          const entries: string[] = (await fs.readdir(dir))
-            .map((p: string): string => join(dir, p));
-
-          const stats: { [entry: string]: Stats } = {};
-
-          for (const entry of entries) {
-            const stat = await fs.stat(entry);
-            stats[entry] = stat;
-
-            if (stat.isDirectory()) {
-              hasSubdirs = true;
-              await reducer(acc, entry);
-            }
-          }
-          if (hasSubdirs) {
-            for (const entry of entries) {
-              if (stats[entry].isFile()) {
-                extraCopies$.push(new CopyPath(entry, root));
-              }
-            }
-          } else {
-            acc.push(new CopyPath(dir, root));
-          }
-
-          this.emit(BuildEvent.FORMAT_DIR_OK, dir);
-          this._ora.text = `Formatted ${dir}`;
-
-          return acc;
-        } catch (e) {
-          this.emit(BuildEvent.FORMAT_DIR_ERR, dir, e);
-        }
-      };
-
-      return reducer;
-    };
-
     Bluebird
       .reduce(
         this.conf.dirs,
-        (acc: CopyPath[], dir: string): Promise<CopyPath[]> => createReducer(dir)(acc, dir),
+        (acc: CopyPath[], dir: string): Promise<CopyPath[]> => this.createReducer(dir, extraCopies$)(acc, dir),
         out
       )
       .then(
@@ -77,6 +36,49 @@ class FormatSourceDirsExecutor extends Executor {
           this.onError(e);
         }
       );
+  }
+
+  private createReducer(root: string, extraCopies$: CopyPath[]): Reducer {
+    const reducer = async(acc: CopyPath[], dir: string): Promise<CopyPath[]> => {
+      try {
+        dir = resolve(dir);
+        this.emit(BuildEvent.FORMAT_DIR_BEGIN, dir);
+
+        let hasSubdirs = false;
+        const entries: string[] = (await fs.readdir(dir))
+          .map((p: string): string => join(dir, p));
+
+        const stats: { [entry: string]: Stats } = {};
+
+        for (const entry of entries) {
+          const stat = await fs.stat(entry);
+          stats[entry] = stat;
+
+          if (stat.isDirectory()) {
+            hasSubdirs = true;
+            await reducer(acc, entry);
+          }
+        }
+        if (hasSubdirs) {
+          for (const entry of entries) {
+            if (stats[entry].isFile()) {
+              extraCopies$.push(new CopyPath(entry, root));
+            }
+          }
+        } else {
+          acc.push(new CopyPath(dir, root));
+        }
+
+        this.emit(BuildEvent.FORMAT_DIR_OK, dir);
+        this._ora.text = `Formatted ${dir}`;
+
+        return acc;
+      } catch (e) {
+        this.emit(BuildEvent.FORMAT_DIR_ERR, dir, e);
+      }
+    };
+
+    return reducer;
   }
 }
 

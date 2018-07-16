@@ -9,6 +9,8 @@ import {gzip} from 'zlib';
 import {Executor} from '../Executor';
 import {BuildEvent} from '../interfaces/BuildEvent';
 
+const hashRegex = /[\da-z]{32}/i;
+
 /** @internal */
 class WriteManifestExecutor extends Executor {
 
@@ -18,43 +20,11 @@ class WriteManifestExecutor extends Executor {
 
     const manifest: Manifest = <any>{};
     const filter = /\.js(\.gz|\.br)?$/;
-    const hashRegex = /[\da-z]{32}/i;
 
     Bluebird.resolve(fs.readdir(this.builder.conf.outDir))
       .filter((fname: string): boolean => filter.test(fname))
-      .reduce(
-        (acc: Manifest, fname: string): Promise<Manifest> => {
-          const hash: string = (fname.match(hashRegex))[0];
-          const enc: Encoding = fname.endsWith('br') ? Encoding.BROTLI
-            : fname.endsWith('gz') ? Encoding.GZIP : Encoding.RAW;
-          const encName: 'br' | 'gz' | 'raw' = enc === Encoding.RAW ? 'raw'
-            : enc === Encoding.BROTLI ? 'br' : 'gz';
-
-          return fs.readFile(join(this.conf.outDir, fname))
-            .then((buf: Buffer) => {
-              const tag = etag(buf);
-              const setTag: ManifestEtag = {
-                encoding: enc,
-                hash
-              };
-              set(acc, ['etags', tag], setTag);
-              set(acc, ['hashes', hash, encName, 'etag'], tag);
-
-              return acc;
-            });
-        },
-        manifest
-      )
-      .then(() => new Promise<Buffer>((resolve, reject) => {
-        manifest.lastModified = getLastModified();
-        gzip(JSON.stringify(manifest), {level: 9}, (error, result) => {
-          if (error) {
-            reject(error);
-          } else {
-            resolve(result);
-          }
-        });
-      }))
+      .reduce(this.reducer.bind(this), manifest)
+      .then(() => this.gzip(manifest))
       .then((gzippedManifest: Buffer) => {
         return fs.writeFile(join(this.conf.outDir, 'manifest.json.gz'), gzippedManifest);
       })
@@ -68,6 +38,40 @@ class WriteManifestExecutor extends Executor {
           this.onError(e);
         }
       );
+  }
+
+  private gzip(manifest: Manifest): Promise<Buffer> {
+    return new Promise<Buffer>((resolve, reject) => {
+      manifest.lastModified = getLastModified();
+      gzip(JSON.stringify(manifest), {level: 9}, (error, result) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(result);
+        }
+      });
+    });
+  }
+
+  private reducer(acc: Manifest, fname: string): Promise<Manifest> {
+    const hash: string = (fname.match(hashRegex))[0];
+    const enc: Encoding = fname.endsWith('br') ? Encoding.BROTLI
+      : fname.endsWith('gz') ? Encoding.GZIP : Encoding.RAW;
+    const encName: 'br' | 'gz' | 'raw' = enc === Encoding.RAW ? 'raw'
+      : enc === Encoding.BROTLI ? 'br' : 'gz';
+
+    return fs.readFile(join(this.conf.outDir, fname))
+      .then((buf: Buffer) => {
+        const tag = etag(buf);
+        const setTag: ManifestEtag = {
+          encoding: enc,
+          hash
+        };
+        set(acc, ['etags', tag], setTag);
+        set(acc, ['hashes', hash, encName, 'etag'], tag);
+
+        return acc;
+      });
   }
 }
 
