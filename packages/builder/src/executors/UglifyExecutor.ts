@@ -28,17 +28,7 @@ class UglifyExecutor extends PoolExecutor {
 
     Bluebird
       .map(this.builder[COMBO_HASHES], (hash: string) => {
-        this.emit(BuildEvent.UGLIFY_ONE_BEGIN, hash);
-
-        return this._wrap(this._pool.exec('uglify', [hash, this.conf.outDir]))
-          .then(() => {
-            this._inc().emit(BuildEvent.UGLIFY_ONE_OK, hash);
-          })
-          .catch((e: Error) => {
-            this.emit(BuildEvent.UGLIFY_ONE_ERR, hash, e);
-
-            throw e;
-          });
+        return this.map(hash);
       })
       .then(
         () => {
@@ -64,6 +54,20 @@ class UglifyExecutor extends PoolExecutor {
     this._ora.text = this._progressText;
 
     return this;
+  }
+
+  private map(hash: string): Bluebird<void> {
+    this.emit(BuildEvent.UGLIFY_ONE_BEGIN, hash);
+
+    return this._wrap(this._pool.exec('uglify', [hash, this.conf.outDir]))
+      .then(() => {
+        this._inc().emit(BuildEvent.UGLIFY_ONE_OK, hash);
+      })
+      .catch((e: Error) => {
+        this.emit(BuildEvent.UGLIFY_ONE_ERR, hash, e);
+
+        throw e;
+      });
   }
 }
 

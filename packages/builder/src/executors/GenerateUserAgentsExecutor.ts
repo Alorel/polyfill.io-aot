@@ -13,25 +13,7 @@ class GenerateUserAgentsExecutor extends Executor {
       const all: string[] = [];
 
       for (const vendor of Object.keys(this.conf.uaGenerators)) {
-        this.emit(BuildEvent.GENERATE_UAS_VENDOR_BEGIN, vendor);
-        try {
-          const generator: UAGeneratorFunction = this.conf.uaGenerators[vendor];
-          let numUnique = 0;
-
-          for (const str of generator()) {
-            if (!all.includes(str)) {
-              numUnique++;
-              all.push(str);
-            }
-          }
-
-          this._ora.text = `Generated mock user agents for ${vendor}`;
-          this.emit(BuildEvent.GENERATE_UAS_VENDOR_OK, vendor, numUnique);
-        } catch (e) {
-          this.emit(BuildEvent.GENERATE_UAS_VENDOR_ERR, vendor, e);
-          // noinspection ExceptionCaughtLocallyJS
-          throw e;
-        }
+        this.processVendor(vendor, all);
       }
 
       this.builder[USERAGENTS] = all;
@@ -40,6 +22,28 @@ class GenerateUserAgentsExecutor extends Executor {
     } catch (e) {
       this._ora.fail(`Failed to generate mock user agents: ${this.formatError(e)}`);
       this.onError(e);
+    }
+  }
+
+  private processVendor(vendor: string, all: string[]): void {
+    this.emit(BuildEvent.GENERATE_UAS_VENDOR_BEGIN, vendor);
+    try {
+      const generator: UAGeneratorFunction = this.conf.uaGenerators[vendor];
+      let numUnique = 0;
+
+      for (const str of generator()) {
+        if (!all.includes(str)) {
+          numUnique++;
+          all.push(str);
+        }
+      }
+
+      this._ora.text = `Generated mock user agents for ${vendor}`;
+      this.emit(BuildEvent.GENERATE_UAS_VENDOR_OK, vendor, numUnique);
+    } catch (e) {
+      this.emit(BuildEvent.GENERATE_UAS_VENDOR_ERR, vendor, e);
+      // noinspection ExceptionCaughtLocallyJS
+      throw e;
     }
   }
 

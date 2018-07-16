@@ -23,39 +23,8 @@ class CompressExecutor extends PoolExecutor {
 
     Bluebird
       .map(this.builder[COMBO_HASHES], (hash: string) => {
-        const $zp = this
-          ._wrap(this._pool.exec('gzip', [
-            this.conf.outDir,
-            hash,
-            this.conf.zopfli
-          ]))
-          .then(() => {
-            this[STAT][ZOPFLI_COMPLETE]++;
-            this._ora.text = this[STAT].toString();
-            this.emit(BuildEvent.COMPRESS_ZOPFLI_OK, this[STAT]);
-          })
-          .catch((e: Error) => {
-            this.emit(BuildEvent.COMPRESS_ZOPFLI_ERR, hash, e);
-            throw e;
-          });
-
-        const $br = this
-          ._wrap(this._pool.exec('brotli', [
-            this.conf.outDir,
-            hash,
-            this.conf.brotli
-          ]))
-          .then(() => {
-            this[STAT][BROTLI_COMPLETE]++;
-            this._ora.text = this[STAT].toString();
-            this.emit(BuildEvent.COMPRESS_BROTLI_OK, this[STAT]);
-          })
-          .catch((e: Error) => {
-            this.emit(BuildEvent.COMPRESS_BROTLI_ERR, hash, e);
-            throw e;
-          });
-
-        return Bluebird.all([$zp, $br]).then(noop);
+        return Bluebird.all([this.makeZopfli(hash), this.makeBrotli(hash)])
+          .then(noop);
       })
       .then(
         () => {
@@ -73,6 +42,42 @@ class CompressExecutor extends PoolExecutor {
       )
       .finally(() => {
         this._terminate().catch(noop);
+      });
+  }
+
+  private makeBrotli(hash: string): Bluebird<void> {
+    return this
+      ._wrap(this._pool.exec('brotli', [
+        this.conf.outDir,
+        hash,
+        this.conf.brotli
+      ]))
+      .then(() => {
+        this[STAT][BROTLI_COMPLETE]++;
+        this._ora.text = this[STAT].toString();
+        this.emit(BuildEvent.COMPRESS_BROTLI_OK, this[STAT]);
+      })
+      .catch((e: Error) => {
+        this.emit(BuildEvent.COMPRESS_BROTLI_ERR, hash, e);
+        throw e;
+      });
+  }
+
+  private makeZopfli(hash: string): Bluebird<void> {
+    return this
+      ._wrap(this._pool.exec('gzip', [
+        this.conf.outDir,
+        hash,
+        this.conf.zopfli
+      ]))
+      .then(() => {
+        this[STAT][ZOPFLI_COMPLETE]++;
+        this._ora.text = this[STAT].toString();
+        this.emit(BuildEvent.COMPRESS_ZOPFLI_OK, this[STAT]);
+      })
+      .catch((e: Error) => {
+        this.emit(BuildEvent.COMPRESS_ZOPFLI_ERR, hash, e);
+        throw e;
       });
   }
 }

@@ -19,6 +19,7 @@ import {
   POLYFILLS_ROOT,
   USERAGENTS
 } from '../../packages/builder/src/symbols';
+import {Encoding, Hash, Manifest, ManifestEtag} from '../../packages/common';
 import CompilePolyfillsExecutor = require('../../packages/builder/src/executors/CompilePolyfillsExecutor');
 import CompressExecutor = require('../../packages/builder/src/executors/CompressExecutor');
 import CopyExtraFilesExecutor = require('../../packages/builder/src/executors/CopyExtraFilesExecutor');
@@ -29,6 +30,8 @@ import GenerateUserAgentsExecutor = require('../../packages/builder/src/executor
 import UglifyExecutor = require('../../packages/builder/src/executors/UglifyExecutor');
 import ValidateSourceDirsExecutor = require('../../packages/builder/src/executors/ValidateSourceDirsExecutor');
 import WritePolyfillCombinationsExecutor = require('../../packages/builder/src/executors/WritePolyfillCombinationsExecutor');
+import WriteManifestExecutor = require('../../packages/builder/src/executors/WriteManifestExecutor');
+import isObject = require('lodash/isObject');
 
 tmp.setGracefulCleanup();
 
@@ -116,7 +119,7 @@ describe('Executors', () => {
     });
   });
 
-  describe('ValidateSourceDirsExecutor', () => {
+  describe('WriteManifestExecutor', () => {
     it('Should finish', () => {
       return promisify(ValidateSourceDirsExecutor, BuildEvent.VALIDATE_DIRS_OK);
     });
@@ -251,15 +254,7 @@ describe('Executors', () => {
       it('Dir should no longer be empty', () => {
         return fs.readdir(outDir)
           .then((i: string[]) => {
-            expect(i.length).to.eq(pb[COMBO_HASHES].length + 1);
-          });
-      });
-
-      it('Dir should have a valid manifest', () => {
-        return fs.readFile(join(outDir, 'manifest.json'), 'utf8')
-          .then(JSON.parse)
-          .then((manifest: string[]) => {
-            expect(manifest).to.deep.eq(pb[COMBO_HASHES]);
+            expect(i.length).to.eq(pb[COMBO_HASHES].length);
           });
       });
     });
@@ -270,7 +265,6 @@ describe('Executors', () => {
 
     const getSize = (): Bluebird<number> => {
       return Bluebird.resolve(fs.readdir(outDir))
-        .filter((f: string) => f !== 'manifest.json')
         .map((f: string) => fs.stat(join(outDir, f)))
         .map((s: Stats) => s.size)
         .reduce((acc: number, size: number): number => acc + size, 0);
@@ -319,7 +313,7 @@ describe('Executors', () => {
       });
     });
 
-    it('Br file contents should ungzip to the same contents', () => {
+    it('Br file contents should decompress to the same contents', () => {
       return Bluebird.map(pb[COMBO_HASHES], (hash: string) => {
         return fs.readFile(join(outDir, `${hash}.js`), 'utf8')
           .then((original: string) => {
@@ -338,6 +332,81 @@ describe('Executors', () => {
               });
           });
       });
+    });
+  });
+
+  describe('WriteManifestExecutor', () => {
+    let manifestContents: Manifest;
+
+    before('run', () => {
+      return promisify(WriteManifestExecutor, BuildEvent.WRITE_MANIFEST_OK);
+    });
+
+    before('parse', () => {
+      return fs.readFile(join(outDir, 'manifest.json.gz'))
+        .then(zlib.unzipSync)
+        .then(b => {
+          manifestContents = JSON.parse(b.toString());
+        });
+    });
+
+    it('Should have a valid last-modified', () => {
+      expect(manifestContents.lastModified).to
+        .match(/^[A-Z][a-z]{2},\s\d{2}\s[A-Z][a-z]{2}\s\d{4}\s\d{2}:\d{2}:\d{2}\sGMT$/);
+    });
+
+    it('Should have a hashes object', () => {
+      expect(isObject(manifestContents.hashes)).to.eq(true);
+    });
+
+    it('Should have an etags object', () => {
+      expect(isObject(manifestContents.etags)).to.eq(true);
+    });
+
+    describe('etags', () => {
+      let tag: ManifestEtag;
+
+      before('init etag', () => {
+        tag = manifestContents.etags[Object.keys(manifestContents.etags)[0]];
+      });
+
+      it('Should have a hash', () => {
+        expect(tag.hash).to.match(/^[a-z\d]{32}$/gi);
+      });
+
+      it('Should have an encoding', () => {
+        const e = tag.encoding;
+        expect(e === Encoding.RAW || e === Encoding.GZIP || e === Encoding.BROTLI)
+          .to.eq(true);
+      });
+    });
+
+    describe('Hashes', () => {
+      let hash: Hash;
+
+      before('init hash', () => {
+        hash = manifestContents.hashes[Object.keys(manifestContents.hashes)[0]];
+      });
+
+      it('Should have a br key', () => {
+        expect(hash).to.haveOwnProperty('br');
+      });
+
+      it('Should have a gz key', () => {
+        expect(hash).to.haveOwnProperty('gz');
+      });
+
+      it('Should have a raw key', () => {
+        expect(hash).to.haveOwnProperty('raw');
+      });
+
+      for (const k of ['raw', 'br', 'gz']) {
+        describe(k, () => {
+          it('Should have a string etag value', () => {
+            expect(typeof hash[k].etag).to.eq('string');
+          });
+        });
+      }
     });
   });
 });

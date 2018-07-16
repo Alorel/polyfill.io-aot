@@ -5,6 +5,10 @@ An AOT-bundler for [polyfill.io](https://polyfill.io)'s
 
 ![Preview](https://cdn.rawgit.com/Alorel/polyfill.io-aot/fe6db4d188c8e4206571889bb0066ac74e28605d/assets/preview.gif)
 
+[![codebeat badge](https://codebeat.co/badges/0c6bfaca-9794-4588-a017-05d88882e364)](https://codebeat.co/projects/github-com-alorel-polyfill-io-aot-master)
+[![CodeFactor](https://www.codefactor.io/repository/github/alorel/polyfill.io-aot/badge)](https://www.codefactor.io/repository/github/alorel/polyfill.io-aot)
+[![Coverage Status](https://coveralls.io/repos/github/Alorel/polyfill.io-aot/badge.svg)](https://coveralls.io/github/Alorel/polyfill.io-aot)
+
 # Table of Contents
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
@@ -143,6 +147,8 @@ import {BuildEvent} from '@polyfill-io-aot/builder';
 | VALIDATE_DIRS_OK          	|                                   	| Validating of directories from the `dirs` option succeeded.                                     	|
 | VALIDATE_DIR_BEGIN        	| directory (string)                	|                                                                                                 	|
 | VALIDATE_DIR_ERR          	| directory (string)                	|                                                                                                 	|
+| WRITE_MANIFEST_BEGIN       	|                                   	| Started writing manifest.json                                                                   	|
+| WRITE_MANIFEST_OK          	|                                   	| Finished writing manifest.json                                                                   	|
 
 [^Table of Contents](#table-of-contents)
 
@@ -250,6 +256,12 @@ polyfills
   .then(buffer => doSomething(buffer));
 ```
 
+The buffer returned also has the following read-only properties:
+
+- `$hash`: Hash of the included polyfills
+- `$etag`: ETag of the buffer
+- `$lastModified` (pre-built polyfills only): a header-friendly string of when the polyfills were built. 
+
 [^Table of Contents](#table-of-contents)
 
 ### Consumer API configuration
@@ -282,8 +294,8 @@ The `PolyfillIoAot` instance will emit an event which you can subscribe to and r
 import {PolyfillIoAot} from '@polyfill-io-aot/core';
 
 const aot = new PolyfillIoAot();
-aot.on(PolyfillIoAot.POLYFILL_NOT_FOUND, (userAgent, computedPolyfills) => {
-  log('The world is ending: ', userAgent, computedPolyfills);
+aot.on(PolyfillIoAot.POLYFILL_NOT_FOUND, (userAgent, computedPolyfills, hash) => {
+  log('The world is ending: ', userAgent, computedPolyfills, hash);
 });
 ```
 
