@@ -18,8 +18,25 @@ script:
   - yarn run test --forbid-only --forbid-pending
 after_success: cat ./coverage/lcov.info | coveralls
 after_script: if [ $GH_TOKEN ]; then greenkeeper-lockfile-upload; fi;
-before_cache: rm -rf node_modules/.cache
 cache:
   yarn: true
 
-#openssl aes-256-cbc -K $encrypted_38a76308a702_key -iv $encrypted_38a76308a702_iv -in .npmrc.enc -out .npmrc -d
+stages:
+  - Test
+  - name: &deployStage Deploy
+    if: tag IS present
+
+jobs:
+  include:
+    - stage: *deployStage
+      node_js: stable
+      before_install:
+        - npm install -g yarn
+        - yarn run sync
+      script:
+        - yarn run tsc
+        - yarn run doctoc
+        - openssl aes-256-cbc -K $encrypted_38a76308a702_key -iv $encrypted_38a76308a702_iv -in .npmrc.enc -out .npmrc -d
+        - ./build/publish.sh
+      after_success: false
+      after_script: false
