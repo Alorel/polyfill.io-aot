@@ -8,7 +8,7 @@ import {createRequestHandler} from '../../packages/express/index';
 
 tmp.setGracefulCleanup();
 
-describe.only('express', () => {
+describe('express', () => {
   let app: e.Express;
   let outDir: string;
   let aot: PolyfillIoAot;
