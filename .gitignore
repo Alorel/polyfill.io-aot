@@ -1,2 +1,11 @@
 /.idea/
-/node_modules/
+node_modules/
+/packages/**/*.js
+/packages/**/*.js.map
+/packages/**/*.d.ts
+/.nyc_output/
+/coverage/
+yarn-error.log
+/.npmrc
+*.tgz
+/packages/**/.npmignore

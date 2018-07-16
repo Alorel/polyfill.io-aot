@@ -1,0 +1,31 @@
+{
+  "name": "@polyfill-io-aot/builder",
+  "version": "0.1.0-alpha.1",
+  "author": "Alorel <a.molcanovas@gmail.com> (https://github.com/Alorel)",
+  "license": "MIT",
+  "repository": "git@github.com:Alorel/polyfill.io-aot.git",
+  "main": "index.js",
+  "dependencies": {
+    "@polyfill-io-aot/common": "0.1.0-alpha.1",
+    "typescript-lazy-get-decorator": "^1.2.0",
+    "cross-spawn": "^6.0.0",
+    "fs-extra": "^6.0.0",
+    "lodash": "^4.0.0",
+    "bluebird": "^3.0.0",
+    "polyfill-service": "^3.0.0",
+    "tslib": "^1.6.0",
+    "node-zopfli": "^2.0.0",
+    "iltorb": "^2.0.0",
+    "ora": "^2.0.0",
+    "workerpool": "^2.0.0",
+    "uglify-js": "^3.4.1",
+    "@types/node": ">=1.0.0 <99.0.0",
+    "@types/node-zopfli": "^2.0.0"
+  },
+  "peerDependencies": {
+    "polyfill-service": "^3.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

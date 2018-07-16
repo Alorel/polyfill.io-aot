@@ -1,0 +1,35 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": ".",
+    "sourceMap": true,
+    "stripInternal": true,
+    "declaration": true,
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "emitDecoratorMetadata": false,
+    "experimentalDecorators": true,
+    "target": "ES2016",
+    "module": "commonjs",
+    "paths": {
+      "@polyfill-io-aot/common/*": [
+        "./packages/common/*"
+      ],
+      "@polyfill-io-aot/builder/*": [
+        "./packages/builder/*"
+      ],
+      "@polyfill-io-aot/core/*": [
+        "./packages/core/*"
+      ],
+      "@polyfill-io-aot/express/*": [
+        "./packages/express/*"
+      ],
+      "@polyfill-io-aot/builder-cli/*": [
+        "./packages/builder-cli/*"
+      ]
+    }
+  },
+  "include": [
+    "packages"
+  ]
+}

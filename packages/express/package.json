@@ -1,0 +1,15 @@
+{
+  "name": "@polyfill-io-aot/express",
+  "version": "0.1.0-alpha.1",
+  "author": "Alorel <a.molcanovas@gmail.com> (https://github.com/Alorel)",
+  "license": "MIT",
+  "repository": "git@github.com:Alorel/polyfill.io-aot.git",
+  "main": "index.js",
+  "dependencies": {
+    "@polyfill-io-aot/core": "0.1.0-alpha.1",
+    "@types/express": "^4.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

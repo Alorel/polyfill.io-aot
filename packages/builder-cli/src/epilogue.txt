@@ -1,0 +1,4 @@
+Any inline JSON configuration can be entered in non-strict JSON5 format.
+See:
+  https://www.npmjs.com/package/json5
+  https://spec.json5.org/

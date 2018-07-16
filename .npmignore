@@ -1,0 +1,10 @@
+.idea/
+node_modules/
+**/*.ts
+!**/*.d.ts
+.nyc-output/
+coverage/
+yarn-error.log
+.npmrc
+.npmrc.enc
+*.tgz

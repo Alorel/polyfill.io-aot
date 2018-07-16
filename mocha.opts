@@ -1,0 +1,9 @@
+--throw-deprecation
+-t 300000
+--exit
+--check-leaks
+--full-trace
+-r ts-node/register
+-r source-map-support/register
+--recursive
+test/**/*.ts
