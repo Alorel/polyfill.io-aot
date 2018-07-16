@@ -13,7 +13,6 @@ import {join} from 'path';
 import * as svc from 'polyfill-service';
 import {LazyGetter} from 'typescript-lazy-get-decorator';
 import * as zlib from 'zlib';
-import {unzipSync} from 'zlib';
 import {Compression} from './Compression';
 import {PolyfillCoreConfig} from './PolyfillCoreConfig';
 
@@ -98,7 +97,7 @@ export class PolyfillIoAot extends EventEmitter {
 
   @LazyGetter()
   private get manifest(): Manifest {
-    return JSON.parse(unzipSync(readFileSync(join(this.conf.outDir, 'manifest.json.gz'))).toString());
+    return JSON.parse(zlib.unzipSync(readFileSync(join(this.conf.outDir, 'manifest.json.gz'))).toString());
   }
 
   public getPolyfills(uaString: string, compression: Compression = Compression.NONE): Promise<PolyfillBuffer> {
