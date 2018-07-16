@@ -14,9 +14,6 @@ const enum Const {
 }
 
 function onPolyfillsReceived(res: Response, buf: PolyfillBuffer, acc: Acceptance): void {
-  res.type('application/javascript')
-    .vary(Const.VARY);
-
   if (acc.contentEncoding) {
     res.header('content-encoding', acc.contentEncoding);
   }
@@ -27,15 +24,22 @@ function onPolyfillsReceived(res: Response, buf: PolyfillBuffer, acc: Acceptance
     res.header('last-modified', buf.$lastModified);
   }
 
-  res.status(Const.OK).end(buf, 'utf8');
+  commonHeaders(res)
+    .status(Const.OK)
+    .end(buf, 'utf8');
+}
+
+function commonHeaders(res: Response): Response {
+  return res.type('application/javascript')
+    .vary(Const.VARY);
 }
 
 export function createRequestHandler(init?: Partial<PolyfillCoreConfig> | PolyfillIoAot): PolyfillIoAotRequestHandler {
   const aot = init instanceof PolyfillIoAot ? init : new PolyfillIoAot(init);
 
   function polyfillIoRequestHandler(req: Request, res: Response): void {
-    if (noneMatch(req, aot) || modifiedSince(aot, req)) {
-      res.status(Const.NOT_MODIFIED).vary(Const.VARY).end();
+    if (noneMatch(req, aot) || !modifiedSince(aot, req)) {
+      commonHeaders(res).status(Const.NOT_MODIFIED).end();
 
       return;
     }
@@ -47,7 +51,7 @@ export function createRequestHandler(init?: Partial<PolyfillCoreConfig> | Polyfi
         onPolyfillsReceived(res, buf, acc);
       })
       .catch((e: Error) => {
-        res.contentType('text/plain')
+        res.type('text/plain')
           .status(Const.ERR)
           .end(e.message);
       });

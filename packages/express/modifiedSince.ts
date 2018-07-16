@@ -5,7 +5,7 @@ import {Request} from 'express';
 export function modifiedSince(aot: PolyfillIoAot, req: Request): boolean {
   let since: string;
 
-  if ((since = req.get('if-none-match'))) {
+  if ((since = req.get('if-modified-since'))) {
     try {
       return aot.modifiedSince(since);
     } catch {
