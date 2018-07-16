@@ -5,6 +5,9 @@ An AOT-bundler for [polyfill.io](https://polyfill.io)'s
 
 ![Preview](https://cdn.rawgit.com/Alorel/polyfill.io-aot/fe6db4d188c8e4206571889bb0066ac74e28605d/assets/preview.gif)
 
+[![codebeat badge](https://codebeat.co/badges/0c6bfaca-9794-4588-a017-05d88882e364)](https://codebeat.co/projects/github-com-alorel-polyfill-io-aot-master)
+
+
 # Table of Contents
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->

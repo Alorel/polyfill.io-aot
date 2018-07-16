@@ -16,7 +16,7 @@ script:
   - yarn run tslint
   - yarn run typecheck
   - yarn run test --forbid-only --forbid-pending
-after_success: cat ./coverage/lcov.info | coveralls
+#after_success: cat ./coverage/lcov.info | coveralls
 after_script: if [ $GH_TOKEN ]; then greenkeeper-lockfile-upload; fi;
 cache:
   yarn: true
