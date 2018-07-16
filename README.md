@@ -6,7 +6,8 @@ An AOT-bundler for [polyfill.io](https://polyfill.io)'s
 ![Preview](https://cdn.rawgit.com/Alorel/polyfill.io-aot/fe6db4d188c8e4206571889bb0066ac74e28605d/assets/preview.gif)
 
 [![codebeat badge](https://codebeat.co/badges/0c6bfaca-9794-4588-a017-05d88882e364)](https://codebeat.co/projects/github-com-alorel-polyfill-io-aot-master)
-
+[![CodeFactor](https://www.codefactor.io/repository/github/alorel/polyfill.io-aot/badge)](https://www.codefactor.io/repository/github/alorel/polyfill.io-aot)
+[![Coverage Status](https://coveralls.io/repos/github/Alorel/polyfill.io-aot/badge.svg)](https://coveralls.io/github/Alorel/polyfill.io-aot)
 
 # Table of Contents
 
