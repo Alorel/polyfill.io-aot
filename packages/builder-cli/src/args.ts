@@ -9,12 +9,16 @@ import * as yargs from 'yargs';
 export type OmittedProps = 'uaGenerators' | 'outDir' | 'packageManager';
 
 export type CLIPolyfillBuilderConfig = Omit<PartialPolyfillBuilderConfig, OmittedProps> & {
+  /** Maps to outDir */
   out?: string;
+  /** Maps to packageManager */
   pkg?: PackageManager;
 };
 
 export type Args = CLIPolyfillBuilderConfig & {
+  /** Path to config file */
   config?: PartialPolyfillBuilderConfig;
+  /** Inline JSON5 config */
   json?: CLIPolyfillBuilderConfig;
 };
 

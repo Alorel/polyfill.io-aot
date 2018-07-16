@@ -27,8 +27,12 @@ export interface ManifestEtags {
   [etag: string]: ManifestEtag;
 }
 
+/** Polyfill bundle manifest */
 export interface Manifest {
+  /** ETag specs */
   etags: ManifestEtags;
+  /** Hash specs */
   hashes: Hashes;
+  /** Header-friendly bundle generation date */
   lastModified: string;
 }

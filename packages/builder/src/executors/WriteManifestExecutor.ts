@@ -1,5 +1,4 @@
-import {Encoding, Manifest, ManifestEtag} from '@polyfill-io-aot/common';
-import {getLastModified} from '@polyfill-io-aot/common/src/fns/getLastModified';
+import {Encoding, getLastModified, Manifest, ManifestEtag} from '@polyfill-io-aot/common';
 import * as Bluebird from 'bluebird';
 import * as etag from 'etag';
 import * as fs from 'fs-extra';

@@ -12,7 +12,8 @@ const syncedKeys = [
   'license',
   'repository',
   'main',
-  'publishConfig'
+  'publishConfig',
+  'keywords'
 ];
 
 module.exports = {

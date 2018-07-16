@@ -4,7 +4,7 @@ import * as request from 'supertest';
 import * as tmp from 'tmp';
 import {PolyfillBuilder} from '../../packages/builder';
 import {PolyfillIoAot} from '../../packages/core';
-import {createRequestHandler} from '../../packages/express/index';
+import {createRequestHandler} from '../../packages/express';
 
 tmp.setGracefulCleanup();
 

@@ -1,7 +1,7 @@
+import {getLastModified} from '@polyfill-io-aot/common';
 import {expect} from 'chai';
 import {describe, it} from 'mocha';
 import * as m from 'moment-timezone';
-import {getLastModified} from '../../../packages/common/src/fns/getLastModified';
 
 describe('common.getLastModified', () => {
   const rg = /^[A-Z][a-z]{2},\s\d{2}\s[A-Z][a-z]{2}\s\d{4}\s\d{2}:\d{2}:\d{2}\sGMT$/;

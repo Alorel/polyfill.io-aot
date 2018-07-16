@@ -1,3 +1,4 @@
+/** 1:1 mapped option names */
 export const baseOptNames = Object.freeze([
   'brotli',
   'dirs',
@@ -9,6 +10,7 @@ export const baseOptNames = Object.freeze([
   'zopfli'
 ]);
 
+/** Shortened option names */
 export const optnames = Object.freeze(baseOptNames.concat([
   'out',
   'pkg'
