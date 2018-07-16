@@ -1,5 +1,4 @@
-import {Manifest} from '@polyfill-io-aot/common';
-import {DEFAULT_OUT_DIR} from '@polyfill-io-aot/common/src/constants/DEFAULT_OUT_DIR';
+import {DEFAULT_OUT_DIR, Manifest} from '@polyfill-io-aot/common';
 import {md5Object} from '@polyfill-io-aot/common/src/fns/md5Hash';
 import {reducePolyfills} from '@polyfill-io-aot/common/src/fns/reducePolyfills';
 import {PolyfillBuffer} from '@polyfill-io-aot/core/src/PolyfillBuffer';
@@ -49,13 +48,19 @@ function setValue(obj: any, key: PropertyKey, value: any): void {
   });
 }
 
+/** Framework-agnostic polyfill consumer */
 export class PolyfillIoAot extends EventEmitter {
 
+  /** Event name for when a polyfill bundle cannot be found */
   public static readonly POLYFILL_NOT_FOUND = 'POLYFILL_IO_AOT_POLYFILL_NOT_FOUND';
 
   /** @internal */
   private readonly [$cfg]: Readonly<PolyfillCoreConfig>;
 
+  /**
+   * Constructor
+   * @param cfg Partial polyfill configuration
+   */
   public constructor(cfg?: Partial<PolyfillCoreConfig>) {
     super();
     const defaultCfg: PolyfillCoreConfig = {
@@ -75,6 +80,7 @@ export class PolyfillIoAot extends EventEmitter {
     this[$cfg] = Object.freeze(merge(defaultCfg, cfg || {}));
   }
 
+  /** The lastModified value from the manifest */
   @LazyGetter()
   public get lastModified(): string {
     return this.manifest.lastModified;
@@ -100,6 +106,11 @@ export class PolyfillIoAot extends EventEmitter {
     return JSON.parse(zlib.unzipSync(readFileSync(join(this.conf.outDir, 'manifest.json.gz'))).toString());
   }
 
+  /**
+   * Get the polyfills for the given compression level and user agent
+   * @param uaString User agent string
+   * @param [compression=Compression.NONE] Compression level
+   */
   public getPolyfills(uaString: string, compression: Compression = Compression.NONE): Promise<PolyfillBuffer> {
     return svc
       .getPolyfills({
@@ -108,31 +119,16 @@ export class PolyfillIoAot extends EventEmitter {
         uaString
       })
       .then((polyfills: svc.GetPolyfillsResponse): Promise<PolyfillBuffer> => {
-        const hash: string = md5Object(polyfills);
-
-        if (hash in this.manifest.hashes) {
-          return readFile(join(this.conf.outDir, `${hash}.${compression.extension}`))
-            .then((b: Buffer): PolyfillBuffer => {
-              setValue(b, '$etag', this.manifest.hashes[hash][compression.encodingKey].etag);
-              setValue(b, '$lastModified', this.manifest.lastModified);
-              setValue(b, '$hash', hash);
-
-              return <PolyfillBuffer>b;
-            });
-        }
-
-        setImmediate(() => {
-          this.emit(PolyfillIoAot.POLYFILL_NOT_FOUND, uaString, polyfills, hash);
-        });
-
-        return this.generatePolyfills(uaString, compression, hash);
+        return this.onGetPolyfills(uaString, polyfills, compression);
       });
   }
 
+  /** Check whether the given ETag was bundled */
   public hasEtag(eTag: string): boolean {
     return !!this.manifest.etags[eTag];
   }
 
+  /** Check whether the bundle has been modified since the given date */
   public modifiedSince(since: moment.MomentInput): boolean {
     return this.lastModifiedAsMoment.isAfter(since, 'second');
   }
@@ -171,6 +167,33 @@ export class PolyfillIoAot extends EventEmitter {
             return value;
           }
         });
+        setValue(b, '$hash', hash);
+
+        return <PolyfillBuffer>b;
+      });
+  }
+
+  private onGetPolyfills(uaString: string,
+                         polyfills: svc.GetPolyfillsResponse,
+                         compression: Compression): Promise<PolyfillBuffer> {
+    const hash: string = md5Object(polyfills);
+
+    if (hash in this.manifest.hashes) {
+      return this.onHashFound(hash, compression);
+    }
+
+    setImmediate(() => {
+      this.emit(PolyfillIoAot.POLYFILL_NOT_FOUND, uaString, polyfills, hash);
+    });
+
+    return this.generatePolyfills(uaString, compression, hash);
+  }
+
+  private onHashFound(hash: string, compression: Compression): Promise<PolyfillBuffer> {
+    return readFile(join(this.conf.outDir, `${hash}.${compression.extension}`))
+      .then((b: Buffer): PolyfillBuffer => {
+        setValue(b, '$etag', this.manifest.hashes[hash][compression.encodingKey].etag);
+        setValue(b, '$lastModified', this.manifest.lastModified);
         setValue(b, '$hash', hash);
 
         return <PolyfillBuffer>b;

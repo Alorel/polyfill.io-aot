@@ -1,4 +1,4 @@
-import {DEFAULT_OUT_DIR} from '@polyfill-io-aot/common/src/constants/DEFAULT_OUT_DIR';
+import {DEFAULT_OUT_DIR} from '@polyfill-io-aot/common';
 import * as EventEmitter from 'events';
 import {BrotliEncodeParams} from 'iltorb';
 import merge = require('lodash/merge');
@@ -33,6 +33,7 @@ const START_TIME = Symbol('Start time');
 
 export class PolyfillBuilder extends EventEmitter {
 
+  /** Builder configuration */
   public readonly conf: Readonly<PolyfillBuilderConfig>;
   /** @internal */
   public [USERAGENTS]: string[];
@@ -51,6 +52,10 @@ export class PolyfillBuilder extends EventEmitter {
   /** @internal */
   private [START_TIME]: Date;
 
+  /**
+   * Constructor
+   * @param conf Builder configuration
+   */
   public constructor(conf?: PartialPolyfillBuilderConfig) {
     super();
     type Defaults = Omit<PolyfillBuilderConfig, 'uaGenerators' | 'zopfli' | 'brotli'> & {
@@ -86,6 +91,7 @@ export class PolyfillBuilder extends EventEmitter {
     this.initLogs();
   }
 
+  /** Completion promise returned by {@link #start()} */
   @LazyGetter()
   public get promise(): Promise<void> {
     return new Promise<void>((resolve$, reject) => {
@@ -94,6 +100,7 @@ export class PolyfillBuilder extends EventEmitter {
     });
   }
 
+  /** Number of seconds the builder spent building */
   public get runtimeSeconds(): string {
     if (!this[START_TIME]) {
       return '0.00';
@@ -116,6 +123,10 @@ export class PolyfillBuilder extends EventEmitter {
     return join(this[POLYFILL_SERVICE_PKG], 'polyfills');
   }
 
+  /**
+   * Start the build promise
+   * @returns A promise that completes on the END event and rejects on the ERROR event
+   */
   public start(): Promise<void> {
     if (this[START_TIME]) {
       const err = new Error('Build already started');

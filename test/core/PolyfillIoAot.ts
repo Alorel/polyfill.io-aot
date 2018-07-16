@@ -1,12 +1,12 @@
+import {PolyfillBuilder, PolyfillBuilderConfig} from '@polyfill-io-aot/builder';
+import {getLastModified} from '@polyfill-io-aot/common';
+import {Compression, PolyfillBuffer, PolyfillIoAot} from '@polyfill-io-aot/core';
 import * as Bluebird from 'bluebird';
 import {expect} from 'chai';
 import * as iltorb from 'iltorb';
 import {before, describe, it} from 'mocha';
 import * as tmp from 'tmp';
 import * as zlib from 'zlib';
-import {PolyfillBuilder, PolyfillBuilderConfig} from '../../packages/builder';
-import {getLastModified} from '../../packages/common/src/fns/getLastModified';
-import {Compression, PolyfillBuffer, PolyfillIoAot} from '../../packages/core';
 
 tmp.setGracefulCleanup();
 
