@@ -8,12 +8,13 @@ import {createRequestHandler} from '../../packages/express/index';
 
 tmp.setGracefulCleanup();
 
-describe('express', () => {
+describe.only('express', () => {
   let app: e.Express;
   let outDir: string;
   let aot: PolyfillIoAot;
   const polyfills = ['fetch'];
   const ua = 'Mozilla/5.0 (Windows; U; MSIE 8; Windows NT 6.0; en-US)';
+  const vary = 'user-agent, accept-encoding';
 
   function mkTmpDir(): string {
     const opts: tmp.Options = {
@@ -24,11 +25,14 @@ describe('express', () => {
     return tmp.dirSync(opts).name;
   }
 
-  function call(cb: any, encoding?: string, responseEncoding?: string) {
+  function call(cb: any,
+                encoding?: string | null,
+                responseEncoding?: string,
+                code = 200) {
     let rq = request(app)
       .get('/')
       .set('user-agent', ua)
-      .expect('vary', 'accept-encoding')
+      .expect('vary', vary)
       .expect('content-type', /application\/javascript/);
 
     if (encoding) {
@@ -42,7 +46,7 @@ describe('express', () => {
       rq = rq.set('accept-encoding', '');
     }
 
-    return rq.expect(200, cb); //tslint:disable-line:no-magic-numbers
+    return rq.expect(code, cb); //tslint:disable-line:no-magic-numbers
   }
 
   before('init out dir', () => {
@@ -80,5 +84,28 @@ describe('express', () => {
 
   it('gzip', (cb: any) => {
     call(cb, 'gzip', 'gz');
+  });
+
+  describe('conditional', () => {
+    //tslint:disable:no-magic-numbers
+
+    it('modified-since', (cb: any) => {
+      request(app)
+        .get('/')
+        .set('if-modified-since', aot.lastModified)
+        .expect('vary', vary)
+        .expect(304, cb);
+    });
+
+    it('modified-since', (cb: any) => {
+      const etag: string = Object.keys(aot['manifest'].etags)[0];
+
+      request(app)
+        .get('/')
+        .set('if-none-match', etag)
+        .expect('vary', vary)
+        .expect(304, cb);
+    });
+    //tslint:disable:no-magic-numbers
   });
 });

@@ -47,6 +47,8 @@ export enum BuildEvent {
   FORMAT_DIRS_OK = 'ok:format-dirs',
   START = 'start',
   VALIDATE_DIRS_BEGIN = 'begin:validate-dirs',
+  WRITE_MANIFEST_BEGIN = 'begin:write-manifest',
+  WRITE_MANIFEST_OK = 'ok:write-manifest',
   VALIDATE_DIRS_OK = 'ok:validate-dirs',
   VALIDATE_DIR_BEGIN = 'begin:validate-dir',
   VALIDATE_DIR_ERR = 'err:validate-dir'

@@ -145,10 +145,11 @@ export class PolyfillBuilder extends EventEmitter {
       [BuildEvent.GENERATE_UAS_ALL_OK]: './executors/GeneratePolyfillCombinations',
       [BuildEvent.GENERATE_COMBO_ALL_OK]: './executors/WritePolyfillCombinationsExecutor',
       [BuildEvent.GENERATE_BUNDLES_OK]: './executors/UglifyExecutor',
-      [BuildEvent.UGLIFY_ALL_OK]: './executors/CompressExecutor'
+      [BuildEvent.UGLIFY_ALL_OK]: './executors/CompressExecutor',
+      [BuildEvent.COMPRESS_ALL_OK]: './executors/WriteManifestExecutor'
     };
 
-    this.once(BuildEvent.COMPRESS_ALL_OK, () => {
+    this.once(BuildEvent.WRITE_MANIFEST_OK, () => {
       setImmediate(() => {
         this.emit(BuildEvent.END);
       });

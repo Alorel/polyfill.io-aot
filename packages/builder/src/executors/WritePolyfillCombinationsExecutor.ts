@@ -1,7 +1,6 @@
 import * as Bluebird from 'bluebird';
 import * as fs from 'fs-extra';
 import noop = require('lodash/noop');
-import {join} from 'path';
 import {BuildEvent} from '../interfaces/BuildEvent';
 import {PoolExecutor} from '../PoolExecutor';
 import {replacer} from '../Serialiser';
@@ -14,12 +13,6 @@ class WritePolyfillCombinationsExecutor extends PoolExecutor {
     this._ora.start(`Creating empty output dir ${this.conf.outDir}`);
 
     Bluebird.resolve(fs.emptyDir(this.conf.outDir))
-      .then(() => {
-        const to: string = join(this.conf.outDir, 'manifest.json');
-        this._ora.text = `Writing manifest to ${to}`;
-
-        return fs.writeFile(to, JSON.stringify(this.builder[COMBO_HASHES]));
-      })
       .then(() => {
         this._initPool(require.resolve('../workers/polyfill-string-generator'));
         this._ora.text = 'Generating bundles';

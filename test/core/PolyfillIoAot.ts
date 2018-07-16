@@ -5,7 +5,8 @@ import {before, describe, it} from 'mocha';
 import * as tmp from 'tmp';
 import * as zlib from 'zlib';
 import {PolyfillBuilder, PolyfillBuilderConfig} from '../../packages/builder';
-import {Compression, PolyfillIoAot} from '../../packages/core';
+import {getLastModified} from '../../packages/common/src/fns/getLastModified';
+import {Compression, PolyfillBuffer, PolyfillIoAot} from '../../packages/core';
 
 tmp.setGracefulCleanup();
 
@@ -15,8 +16,9 @@ describe('core.PolyfillIoAot', () => {
   let outDir: string;
   let aot: PolyfillIoAot;
   const unknownUas: Set<string> = new Set<string>();
-  const polyfills = ['default'];
+  const polyfills = ['fetch'];
   const ua = 'Mozilla/5.0 (Windows; U; MSIE 8; Windows NT 6.0; en-US)';
+  const lastModifiedRe = /^[A-Z][a-z]{2},\s\d{2}\s[A-Z][a-z]{2}\s\d{4}\s\d{2}:\d{2}:\d{2}\sGMT$/;
 
   function mkTmpDir(): string {
     const opts: tmp.Options = {
@@ -56,6 +58,12 @@ describe('core.PolyfillIoAot', () => {
     return new PolyfillBuilder(conf).start();
   });
 
+  describe('General', () => {
+    it('Should have a valid last modified', () => {
+      expect(aot.lastModified).to.eq(aot['manifest'].lastModified);
+    });
+  });
+
   describe('Get known UA polyfill string', () => {
     let none: Buffer;
     let noneStr: string;
@@ -76,6 +84,29 @@ describe('core.PolyfillIoAot', () => {
         }
       };
     }
+
+    describe('PolyfillBuffer', () => {
+      let b: PolyfillBuffer;
+
+      before('get poly buffer', () => {
+        return aot.getPolyfills(ua)
+          .then(bf => {
+            b = bf;
+          });
+      });
+
+      it('Should have a hash', () => {
+        expect(b.$hash).to.match(/^[a-z0-9]{32}$/i);
+      });
+
+      it('Should have a lastModified', () => {
+        expect(b.$lastModified).to.match(lastModifiedRe);
+      });
+
+      it('Should have an etag', () => {
+        expect(typeof b.$etag).to.eq('string');
+      });
+    });
 
     describe('Compression.NONE', () => {
       before(() => {
@@ -144,7 +175,11 @@ describe('core.PolyfillIoAot', () => {
     before('run', () => {
       aot$ = new AotPatched({outDir, polyfills});
       Object.defineProperty(aot$, 'manifest', {
-        value: []
+        value: {
+          etags: {},
+          hashes: {},
+          lastModified: getLastModified()
+        }
       });
 
       return Bluebird.resolve(aot$.getPolyfills(ua))
@@ -153,6 +188,29 @@ describe('core.PolyfillIoAot', () => {
 
           return Bluebird.delay(100);
         });
+    });
+
+    describe('PolyfillBuffer', () => {
+      let b: PolyfillBuffer;
+
+      before('get poly buffer', () => {
+        return aot$.getPolyfills(ua)
+          .then(bf => {
+            b = bf;
+          });
+      });
+
+      it('Should have a hash', () => {
+        expect(b.$hash).to.match(/^[a-z0-9]{32}$/i);
+      });
+
+      it('Should not have a lastModified', () => {
+        expect(typeof b.$lastModified).to.eq('undefined');
+      });
+
+      it('Should have an etag', () => {
+        expect(typeof b.$etag).to.eq('string');
+      });
     });
 
     it('Should return a non-empty buffer', () => {

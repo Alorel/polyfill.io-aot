@@ -1,14 +1,19 @@
+import {Manifest} from '@polyfill-io-aot/common';
 import {DEFAULT_OUT_DIR} from '@polyfill-io-aot/common/src/constants/DEFAULT_OUT_DIR';
 import {md5Object} from '@polyfill-io-aot/common/src/fns/md5Hash';
 import {reducePolyfills} from '@polyfill-io-aot/common/src/fns/reducePolyfills';
+import {PolyfillBuffer} from '@polyfill-io-aot/core/src/PolyfillBuffer';
+import * as etag from 'etag';
 import * as EventEmitter from 'events';
 import {readFile, readFileSync} from 'fs-extra';
 import * as brotli from 'iltorb';
 import merge = require('lodash/merge');
+import * as moment from 'moment-timezone';
 import {join} from 'path';
 import * as svc from 'polyfill-service';
 import {LazyGetter} from 'typescript-lazy-get-decorator';
 import * as zlib from 'zlib';
+import {unzipSync} from 'zlib';
 import {Compression} from './Compression';
 import {PolyfillCoreConfig} from './PolyfillCoreConfig';
 
@@ -33,6 +38,15 @@ function compressBrotli(buf: Buffer, opts: brotli.BrotliEncodeParams): Promise<B
 function compressGzip(buf: Buffer, opts: zlib.ZlibOptions): Promise<Buffer> {
   return new Promise<Buffer>((resolve, reject): void => {
     zlib.gzip(buf, opts, compressCallback(resolve, reject));
+  });
+}
+
+function setValue(obj: any, key: PropertyKey, value: any): void {
+  Object.defineProperty(obj, key, {
+    configurable: false,
+    enumerable: true,
+    value,
+    writable: false
   });
 }
 
@@ -63,6 +77,11 @@ export class PolyfillIoAot extends EventEmitter {
   }
 
   @LazyGetter()
+  public get lastModified(): string {
+    return this.manifest.lastModified;
+  }
+
+  @LazyGetter()
   private get conf(): Readonly<PolyfillCoreConfig> {
     return this[$cfg];
   }
@@ -73,33 +92,53 @@ export class PolyfillIoAot extends EventEmitter {
   }
 
   @LazyGetter()
-  private get manifest(): ReadonlyArray<string> {
-    return Object.freeze(JSON.parse(readFileSync(join(this.conf.outDir, 'manifest.json'), 'utf8')));
+  private get lastModifiedAsMoment(): moment.Moment {
+    return moment(this.manifest.lastModified);
   }
 
-  public getPolyfills(uaString: string, compression: Compression = Compression.NONE): Promise<Buffer> {
+  @LazyGetter()
+  private get manifest(): Manifest {
+    return JSON.parse(unzipSync(readFileSync(join(this.conf.outDir, 'manifest.json.gz'))).toString());
+  }
+
+  public getPolyfills(uaString: string, compression: Compression = Compression.NONE): Promise<PolyfillBuffer> {
     return svc
       .getPolyfills({
         excludes: this.conf.excludes,
         features: this.features,
         uaString
       })
-      .then((polyfills: svc.GetPolyfillsResponse): Promise<Buffer> => {
+      .then((polyfills: svc.GetPolyfillsResponse): Promise<PolyfillBuffer> => {
         const hash: string = md5Object(polyfills);
 
-        if (this.manifest.includes(hash)) {
-          return readFile(join(this.conf.outDir, `${hash}.${compression.extension}`));
+        if (hash in this.manifest.hashes) {
+          return readFile(join(this.conf.outDir, `${hash}.${compression.extension}`))
+            .then((b: Buffer): PolyfillBuffer => {
+              setValue(b, '$etag', this.manifest.hashes[hash][compression.encodingKey].etag);
+              setValue(b, '$lastModified', this.manifest.lastModified);
+              setValue(b, '$hash', hash);
+
+              return <PolyfillBuffer>b;
+            });
         }
 
         setImmediate(() => {
-          this.emit(PolyfillIoAot.POLYFILL_NOT_FOUND, uaString, polyfills);
+          this.emit(PolyfillIoAot.POLYFILL_NOT_FOUND, uaString, polyfills, hash);
         });
 
-        return this.generatePolyfills(uaString, compression);
+        return this.generatePolyfills(uaString, compression, hash);
       });
   }
 
-  private generatePolyfills(uaString: string, compression: Compression): Promise<Buffer> {
+  public hasEtag(eTag: string): boolean {
+    return !!this.manifest.etags[eTag];
+  }
+
+  public modifiedSince(since: moment.MomentInput): boolean {
+    return this.lastModifiedAsMoment.isAfter(since, 'second');
+  }
+
+  private generatePolyfills(uaString: string, compression: Compression, hash: string): Promise<PolyfillBuffer> {
     return svc
       .getPolyfillString({
         excludes: this.conf.excludes,
@@ -117,6 +156,25 @@ export class PolyfillIoAot extends EventEmitter {
           default:
             return polyBuf;
         }
+      })
+      .then((b: Buffer): PolyfillBuffer => {
+        Object.defineProperty(b, '$etag', {
+          configurable: true,
+          enumerable: true,
+          get() {
+            const value = etag(b);
+            Object.defineProperty(b, '$etag', {
+              configurable: false,
+              enumerable: true,
+              value
+            });
+
+            return value;
+          }
+        });
+        setValue(b, '$hash', hash);
+
+        return <PolyfillBuffer>b;
       });
   }
 }

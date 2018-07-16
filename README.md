@@ -143,6 +143,8 @@ import {BuildEvent} from '@polyfill-io-aot/builder';
 | VALIDATE_DIRS_OK          	|                                   	| Validating of directories from the `dirs` option succeeded.                                     	|
 | VALIDATE_DIR_BEGIN        	| directory (string)                	|                                                                                                 	|
 | VALIDATE_DIR_ERR          	| directory (string)                	|                                                                                                 	|
+| WRITE_MANIFEST_BEGIN       	|                                   	| Started writing manifest.json                                                                   	|
+| WRITE_MANIFEST_OK          	|                                   	| Finished writing manifest.json                                                                   	|
 
 [^Table of Contents](#table-of-contents)
 
@@ -250,6 +252,12 @@ polyfills
   .then(buffer => doSomething(buffer));
 ```
 
+The buffer returned also has the following read-only properties:
+
+- `$hash`: Hash of the included polyfills
+- `$etag`: ETag of the buffer
+- `$lastModified` (pre-built polyfills only): a header-friendly string of when the polyfills were built. 
+
 [^Table of Contents](#table-of-contents)
 
 ### Consumer API configuration
@@ -282,8 +290,8 @@ The `PolyfillIoAot` instance will emit an event which you can subscribe to and r
 import {PolyfillIoAot} from '@polyfill-io-aot/core';
 
 const aot = new PolyfillIoAot();
-aot.on(PolyfillIoAot.POLYFILL_NOT_FOUND, (userAgent, computedPolyfills) => {
-  log('The world is ending: ', userAgent, computedPolyfills);
+aot.on(PolyfillIoAot.POLYFILL_NOT_FOUND, (userAgent, computedPolyfills, hash) => {
+  log('The world is ending: ', userAgent, computedPolyfills, hash);
 });
 ```
 
