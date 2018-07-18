@@ -23,9 +23,6 @@ export abstract class Executor {
       spinner: 'dots',
       stream: process.stdout
     };
-    if (process.env.CI_FORCE_PROGRESS) {
-      opts.enabled = true;
-    }
 
     return ora(opts);
   }
