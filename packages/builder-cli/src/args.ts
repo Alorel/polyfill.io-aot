@@ -103,7 +103,7 @@ export const args: Args = <any>yargs
   })
   .option('config', {
     alias: 'c',
-    coerce: require,
+    coerce: (p: string): any => require(join(process.cwd(), p)),
     conflicts: optnames.concat('json'),
     desc: 'Path to a .js config file exporting the configuration (module.exports = {}). '
     + 'No other option may be provided if this is specified.',

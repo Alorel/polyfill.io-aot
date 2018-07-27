@@ -1,3 +1,7 @@
+# 1.0.0-beta.4
+
+- **(fix)**: Relative paths now work with the `-c` option in CLI.
+
 # 1.0.0-beta.3
 
 - **(chore)** Update ora to 3.0
