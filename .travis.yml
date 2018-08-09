@@ -12,7 +12,7 @@ env:
 
 before_install:
   - npm install -g yarn greenkeeper-lockfile@latest
-  - if [[ $GH_TOKEN ]]; then ./prepare-gpg-key.sh; fi;
+  - &prepKey if [[ $GH_TOKEN ]]; then ./prepare-gpg-key.sh; fi;
   - greenkeeper-lockfile-update
   - yarn run sync
 
@@ -25,7 +25,7 @@ script:
 
 after_success: cat ./coverage/lcov.info | coveralls
 
-after_script: if [ $GH_TOKEN ]; then greenkeeper-lockfile-upload; fi;
+after_script: if [[ $GH_TOKEN ]]; then greenkeeper-lockfile-upload; fi;
 
 cache:
   yarn: true
@@ -41,7 +41,7 @@ jobs:
       node_js: stable
       before_install:
         - npm install -g yarn
-        - if [[ $GH_TOKEN ]]; then ./prepare-gpg-key.sh; fi;
+        - *prepKey
         - yarn run sync
       before_script: yarn run tsc
       script: semantic-release
