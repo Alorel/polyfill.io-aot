@@ -32,12 +32,12 @@ cache:
 
 stages:
   - Test
-  - name: Deploy
+  - name: Release
+    if: branch=master AND type = push
 
 jobs:
   include:
-    - stage: Deploy
-      if: branch=master
+    - stage: Release
       node_js: stable
       before_install:
         - npm install -g yarn
