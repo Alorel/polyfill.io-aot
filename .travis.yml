@@ -43,7 +43,9 @@ jobs:
         - npm install -g yarn
         - *prepKey
         - yarn run sync
-      before_script: yarn run tsc
+      before_script:
+        - yarn run tsc
+        - yarn run doctoc
       script: semantic-release
       after_success: []
       after_script: []
