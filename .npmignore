@@ -8,3 +8,5 @@ yarn-error.log
 .npmrc
 .npmrc.enc
 *.tgz
+/git_gpg_keys.asc
+/git_gpg_keys.asc.enc

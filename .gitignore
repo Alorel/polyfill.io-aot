@@ -9,3 +9,4 @@ yarn-error.log
 /.npmrc
 *.tgz
 /packages/**/.npmignore
+/git_gpg_keys.asc

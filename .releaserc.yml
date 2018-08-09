@@ -1,0 +1,23 @@
+branch: master
+tagFormat: ${version}
+verifyConditions:
+- '@semantic-release/github'
+prepare:
+- '@semantic-release/changelog'
+- '@alorel-personal/semantic-release'
+- '@semantic-release/npm'
+- path: semantic-release/exec
+  cmd: yarn run sync
+- path: '@semantic-release/git'
+  message: 'chore(release): ${nextRelease.version}\n\n${nextRelease.notes}'
+  assets:
+  - CHANGELOG.md
+  - package.json
+  - yarn.lock
+  - packages/**/package.json
+generateNotes:
+  config: '@alorel-personal/conventional-changelog-alorel'
+publish:
+- '@semantic-release/github'
+- path: '@semantic-release/exec'
+  cmd: ./build/deploy.sh

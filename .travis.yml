@@ -4,36 +4,46 @@ node_js:
   - lts/carbon
   - lts/boron
 sudo: false
+
 env:
   global:
     - NODE_ENV=ci
     - GK_LOCK_YARN_OPTS=-WD
+
 before_install:
   - npm install -g yarn greenkeeper-lockfile@latest
+  - if [[ $GH_TOKEN ]]; then ./prepare-gpg-key.sh; fi;
   - greenkeeper-lockfile-update
   - yarn run sync
+
 install: yarn install --check-files
+
 script:
   - yarn run tslint
   - yarn run typecheck
   - yarn run test --forbid-only --forbid-pending
+
 after_success: cat ./coverage/lcov.info | coveralls
+
 after_script: if [ $GH_TOKEN ]; then greenkeeper-lockfile-upload; fi;
+
 cache:
   yarn: true
 
 stages:
   - Test
-  - name: &deployStage Deploy
-    if: tag IS present
+  - name: Deploy
 
 jobs:
   include:
-    - stage: *deployStage
+    - stage: Deploy
+      if: branch=master
       node_js: stable
       before_install:
         - npm install -g yarn
+        - if [[ $GH_TOKEN ]]; then ./prepare-gpg-key.sh; fi;
         - yarn run sync
-      script: ./build/deploy.sh
-      after_success: false
-      after_script: false
+      before_script: yarn run tsc
+      script: semantic-release
+      after_success: []
+      after_script: []
