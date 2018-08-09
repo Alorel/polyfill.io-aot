@@ -1,6 +1,6 @@
 {
   "name": "polyfill-io-aot",
-  "version": "1.0.0-beta.4",
+  "version": "1.0.0",
   "description": "Combines sources from the polyfill-service package",
   "main": "index.js",
   "publishConfig": {
