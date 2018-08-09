@@ -6,7 +6,7 @@ prepare:
 - '@semantic-release/changelog'
 - '@alorel-personal/semantic-release'
 - '@semantic-release/npm'
-- path: semantic-release/exec
+- path: '@semantic-release/exec'
   cmd: yarn run sync
 - path: '@semantic-release/git'
   message: 'chore(release): ${nextRelease.version}\n\n${nextRelease.notes}'
