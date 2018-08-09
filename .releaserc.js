@@ -15,6 +15,7 @@ const out = {
     },
     {
       path: '@semantic-release/git',
+      message: 'chore(release): ${nextRelease.version}',
       assets: [
         'CHANGELOG.md',
         'README.md',
