@@ -90,7 +90,7 @@ export const args: Args = <any>yargs
     alias: 'z',
     coerce: json5Parse,
     defaultDescription: '{blocksplitting: true, numiterations: 15}',
-    desc: 'Options to pass to node-zopfli (JSON5).',
+    desc: 'Options to pass to node-zopfli-es (JSON5).',
     string: true
   })
   .option('json', {

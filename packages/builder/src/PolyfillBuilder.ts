@@ -2,7 +2,7 @@ import {DEFAULT_OUT_DIR} from '@polyfill-io-aot/common';
 import * as EventEmitter from 'events';
 import {BrotliEncodeParams} from 'iltorb';
 import merge = require('lodash/merge');
-import {Options as ZopfliOptions} from 'node-zopfli';
+import {Options as ZopfliOptions} from 'node-zopfli-es';
 import * as ora from 'ora';
 import {cpus} from 'os';
 import {dirname, join} from 'path';

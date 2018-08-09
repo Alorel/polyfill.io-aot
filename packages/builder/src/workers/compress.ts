@@ -1,6 +1,6 @@
 import * as fs from 'fs-extra';
 import * as iltorb from 'iltorb';
-import * as zopfli from 'node-zopfli';
+import * as zopfli from 'node-zopfli-es';
 import * as wp from 'workerpool';
 import resolveSourcePath = require('./util/resolveSourcePath');
 

@@ -1,5 +1,5 @@
 import {PolyfillConfigBase} from '@polyfill-io-aot/common';
-import {Options as ZopfliOptions} from 'node-zopfli';
+import {Options as ZopfliOptions} from 'node-zopfli-es';
 
 import {Omit} from './Omit';
 import {PackageManager} from './PackageManager';
@@ -46,7 +46,7 @@ export interface PolyfillBuilderConfig extends PolyfillConfigBase {
    */
   uaGenerators: UserAgentGenerators;
   /**
-   * Options to pass to node-zopfli
+   * Options to pass to node-zopfi-es
    * @default {blocksplitting: true, numiterations: 15}
    */
   zopfli: ZopfliOptions;
