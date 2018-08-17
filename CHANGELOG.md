@@ -1,3 +1,21 @@
+## [1.0.1](https://github.com/Alorel/polyfill.io-aot/compare/1.0.0...1.0.1) (2018-08-17)
+
+
+### Bug Fixes
+
+* **package:** Add yarn.lock to npmignore ([46f093b](https://github.com/Alorel/polyfill.io-aot/commit/46f093b))
+
+
+### Maintenance
+
+* **package:** update [@alorel-personal](https://github.com/alorel-personal)/conventional-changelog-alorel to version 2.0.0 ([6dcd0de](https://github.com/Alorel/polyfill.io-aot/commit/6dcd0de))
+* **package:** update [@alorel-personal](https://github.com/alorel-personal)/conventional-changelog-alorel to version 2.0.1 ([5ac0b38](https://github.com/Alorel/polyfill.io-aot/commit/5ac0b38))
+* **package:** update [@alorel-personal](https://github.com/alorel-personal)/semantic-release to version 1.2.0 ([820ccb7](https://github.com/Alorel/polyfill.io-aot/commit/820ccb7)), closes [#7](https://github.com/Alorel/polyfill.io-aot/issues/7)
+* **package:** update [@alorel-personal](https://github.com/alorel-personal)/semantic-release to version 1.2.1 ([d139ac2](https://github.com/Alorel/polyfill.io-aot/commit/d139ac2))
+* **package:** update [@alorel-personal](https://github.com/alorel-personal)/semantic-release to version 1.2.2 ([ec755a2](https://github.com/Alorel/polyfill.io-aot/commit/ec755a2))
+* **package:** update json5 to version 2.0.0 ([c92c7e5](https://github.com/Alorel/polyfill.io-aot/commit/c92c7e5))
+* **readme:** Add travis badge ([0c058a7](https://github.com/Alorel/polyfill.io-aot/commit/0c058a7))
+
 # 1.0.0 (2018-08-09)
 
 

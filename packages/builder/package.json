@@ -1,12 +1,12 @@
 {
   "name": "@polyfill-io-aot/builder",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Alorel <a.molcanovas@gmail.com> (https://github.com/Alorel)",
   "license": "MIT",
   "repository": "git@github.com:Alorel/polyfill.io-aot.git",
   "main": "index.js",
   "dependencies": {
-    "@polyfill-io-aot/common": "1.0.0",
+    "@polyfill-io-aot/common": "1.0.1",
     "etag": "^1.8.1",
     "typescript-lazy-get-decorator": "^1.2.0",
     "cross-spawn": "^6.0.0",
