@@ -36,7 +36,7 @@
   "author": "Alorel <a.molcanovas@gmail.com> (https://github.com/Alorel)",
   "license": "MIT",
   "devDependencies": {
-    "@alorel-personal/conventional-changelog-alorel": "2.0.0",
+    "@alorel-personal/conventional-changelog-alorel": "2.0.1",
     "@alorel-personal/semantic-release": "1.2.2",
     "@alorel-personal/tslint-rules": "1.2.1",
     "@semantic-release/changelog": "^3.0.0",
