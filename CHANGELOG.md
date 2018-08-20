@@ -1,3 +1,11 @@
+## [1.0.2](https://github.com/Alorel/polyfill.io-aot/compare/1.0.1...1.0.2) (2018-08-20)
+
+
+### Bug Fixes
+
+* **package:** Add prepare-gpg-key.sh to npmignore ([330f6c6](https://github.com/Alorel/polyfill.io-aot/commit/330f6c6))
+* **package:** Remove builder-cli node_modules ([9acaa2d](https://github.com/Alorel/polyfill.io-aot/commit/9acaa2d))
+
 ## [1.0.1](https://github.com/Alorel/polyfill.io-aot/compare/1.0.0...1.0.1) (2018-08-17)
 
 
