@@ -8,7 +8,7 @@ sudo: false
 env:
   global:
     - NODE_ENV=ci
-    - GK_LOCK_YARN_OPTS=-WD
+    - GK_LOCK_YARN_OPTS=-W
 
 before_install:
   - npm install -g yarn greenkeeper-lockfile@latest
