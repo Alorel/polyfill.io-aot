@@ -33,7 +33,7 @@ cache:
 stages:
   - Test
   - name: Release
-    if: branch=master AND type = push
+    if: branch = master AND type = push AND (NOT tag IS present)
 
 jobs:
   include:
