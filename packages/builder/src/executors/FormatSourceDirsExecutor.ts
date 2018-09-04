@@ -39,7 +39,7 @@ class FormatSourceDirsExecutor extends Executor {
   }
 
   private createReducer(root: string, extraCopies$: CopyPath[]): Reducer {
-    const reducer = async(acc: CopyPath[], dir: string): Promise<CopyPath[]> => {
+    const reducer = async (acc: CopyPath[], dir: string): Promise<CopyPath[]> => {
       try {
         dir = resolve(dir);
         this.emit(BuildEvent.FORMAT_DIR_BEGIN, dir);
