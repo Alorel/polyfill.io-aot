@@ -1,3 +1,4 @@
+import {StdioOptions} from 'child_process';
 import {Executor} from '../Executor';
 import {BuildEvent} from '../interfaces/BuildEvent';
 import {POLYFILL_SERVICE_PKG} from '../symbols';
@@ -14,7 +15,7 @@ class CompilePolyfillsExecutor extends Executor {
       ['run', 'build'],
       {
         cwd: this.builder[POLYFILL_SERVICE_PKG],
-        stdio: process.env.POLYFILL_IO_AOT_STDIO || 'pipe'
+        stdio: <StdioOptions>process.env.POLYFILL_IO_AOT_STDIO || 'pipe'
       }
     ).then(
       () => {
