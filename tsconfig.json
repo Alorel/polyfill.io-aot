@@ -1,7 +1,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": ".",
+    "baseUrl": "./",
     "sourceMap": true,
     "stripInternal": true,
     "declaration": true,
@@ -33,6 +33,7 @@
     "packages"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "**/node_modules"
   ]
 }
