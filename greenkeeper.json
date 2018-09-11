@@ -1,0 +1,14 @@
+{
+  "groups": {
+    "default": {
+      "packages": [
+        "package.json",
+        "packages/builder/package.json",
+        "packages/builder-cli/package.json",
+        "packages/common/package.json",
+        "packages/core/package.json",
+        "packages/express/package.json"
+      ]
+    }
+  }
+}
