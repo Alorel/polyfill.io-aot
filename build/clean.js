@@ -2,6 +2,7 @@ const glob = require('glob');
 const {resolve, join} = require('path');
 const fs = require('fs-extra');
 const Bluebird = require('bluebird');
+const uniq = require('lodash/uniq');
 
 const home = resolve(__dirname, '..');
 const cwd = join(home, 'packages');
@@ -13,7 +14,7 @@ const glob$ = Bluebird.promisify(glob);
 
 const promises = [
   Bluebird.all([glob$('**/*.{js,map,d.ts}', {cwd, absolute: true}), glob$('./*.tgz', {cwd: home, absolute: true})])
-    .spread((src, tgz) => src.concat(tgz))
+    .spread((src, tgz) => uniq(src.concat(tgz)).filter(v => !/node_modules/.test(v)))
     .map(path => fs.unlink(path)),
   Bluebird.map(
     ['.nyc_output', 'coverage'],
