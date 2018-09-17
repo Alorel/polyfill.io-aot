@@ -279,7 +279,7 @@
     "@types/node" "*"
     "@types/range-parser" "*"
 
-"@types/express@^4.0.0", "@types/express@^4.16.0":
+"@types/express@^4.16.0":
   version "4.16.0"
   resolved "https://registry.yarnpkg.com/@types/express/-/express-4.16.0.tgz#6d8bc42ccaa6f35cf29a2b7c3333cb47b5a32a19"
   dependencies:
@@ -301,7 +301,7 @@
     "@types/minimatch" "*"
     "@types/node" "*"
 
-"@types/iltorb@^2.0.0", "@types/iltorb@^2.0.1":
+"@types/iltorb@^2.0.1":
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/@types/iltorb/-/iltorb-2.3.0.tgz#22a10a64ab48f059289ad2ec9005f2ff47656cf3"
   dependencies:
@@ -327,19 +327,19 @@
   version "5.2.5"
   resolved "https://registry.yarnpkg.com/@types/mocha/-/mocha-5.2.5.tgz#8a4accfc403c124a0bafe8a9fc61a05ec1032073"
 
-"@types/moment-timezone@>=0.5.0 <1.0.0", "@types/moment-timezone@^0.5.6":
+"@types/moment-timezone@^0.5.6":
   version "0.5.9"
   resolved "https://registry.yarnpkg.com/@types/moment-timezone/-/moment-timezone-0.5.9.tgz#1a34ef6ba2e4578b9ca399ed5eec57525ad1d4a7"
   dependencies:
     moment ">=2.14.0"
 
-"@types/node-zopfli-es@>=0.0.0 <1.0.0", "@types/node-zopfli-es@^0.0.0":
+"@types/node-zopfli-es@^0.0.0":
   version "0.0.0"
   resolved "https://registry.yarnpkg.com/@types/node-zopfli-es/-/node-zopfli-es-0.0.0.tgz#1da8fa2fdb99eed31e90b399a1748093b3064db2"
   dependencies:
     "@types/node" "*"
 
-"@types/node@*", "@types/node@>=1.0.0 <99.0.0", "@types/node@^10.1.2":
+"@types/node@*", "@types/node@^10.1.2":
   version "10.9.4"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.9.4.tgz#0f4cb2dc7c1de6096055357f70179043c33e9897"
 
@@ -349,7 +349,7 @@
   dependencies:
     "@types/node" "*"
 
-"@types/polyfill-service@^3.0.0", "@types/polyfill-service@^3.25.0":
+"@types/polyfill-service@^3.25.0":
   version "3.25.0"
   resolved "https://registry.yarnpkg.com/@types/polyfill-service/-/polyfill-service-3.25.0.tgz#885e46f83a19fbe35c009f385574ecf000507615"
 
@@ -393,9 +393,9 @@
   dependencies:
     "@types/node" "*"
 
-"@types/yargs@^11.1.0":
-  version "11.1.1"
-  resolved "https://registry.yarnpkg.com/@types/yargs/-/yargs-11.1.1.tgz#2e724257167fd6b615dbe4e54301e65fe597433f"
+"@types/yargs@^12.0.0":
+  version "12.0.0"
+  resolved "https://registry.yarnpkg.com/@types/yargs/-/yargs-12.0.0.tgz#cfadf4ca78505a074d9ffcb84f203e97c3ed4347"
 
 Base64@^1.0.0:
   version "1.0.1"
@@ -1122,7 +1122,7 @@ bluebird@^2.9.25:
   version "2.11.0"
   resolved "http://registry.npmjs.org/bluebird/-/bluebird-2.11.0.tgz#534b9033c022c9579c56ba3b3e5a5caafbb650e1"
 
-bluebird@^3.0.0, bluebird@^3.5.0, bluebird@^3.5.1, bluebird@~3.5.1:
+bluebird@^3.5.0, bluebird@^3.5.1, bluebird@~3.5.1:
   version "3.5.2"
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.5.2.tgz#1be0908e054a751754549c270489c1505d4ab15a"
 
@@ -3154,7 +3154,7 @@ iltorb@^1.0.9:
     node-gyp "^3.6.2"
     prebuild-install "^2.3.0"
 
-iltorb@^2.0.0, iltorb@^2.0.1, iltorb@^2.3.2:
+iltorb@^2.0.1, iltorb@^2.3.2:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/iltorb/-/iltorb-2.4.0.tgz#befef47a5aea0cee46767731cb63859b57e58327"
   dependencies:
@@ -3635,7 +3635,7 @@ json5@^0.5.1:
   version "0.5.1"
   resolved "https://registry.yarnpkg.com/json5/-/json5-0.5.1.tgz#1eade7acc012034ad84e2396767ead9fa5495821"
 
-json5@^2.0.0, json5@^2.0.1:
+json5@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/json5/-/json5-2.0.1.tgz#3d6d0d1066039eb50984e66a7840e4f4b7a2c660"
   dependencies:
@@ -4657,7 +4657,7 @@ node-pre-gyp@^0.6.4:
     tar "^2.2.1"
     tar-pack "^3.4.0"
 
-"node-zopfli-es@>=0.0.0 <1.0.0", node-zopfli-es@^0.0.2:
+node-zopfli-es@^0.0.2:
   version "0.0.2"
   resolved "https://registry.yarnpkg.com/node-zopfli-es/-/node-zopfli-es-0.0.2.tgz#a1ad448abc9e5283a3ca8ce6d6a5cc38dade4105"
   dependencies:
@@ -5376,7 +5376,7 @@ pkg-dir@^3.0.0:
   dependencies:
     find-up "^3.0.0"
 
-polyfill-service@^3.0.0, polyfill-service@^3.25.1:
+polyfill-service@^3.25.1:
   version "3.25.1"
   resolved "https://registry.yarnpkg.com/polyfill-service/-/polyfill-service-3.25.1.tgz#4a4a8bfb72677fbdc2d282ff467bdaa94e46bc24"
   dependencies:
@@ -7284,12 +7284,6 @@ worker-farm@^1.6.0:
   resolved "https://registry.yarnpkg.com/worker-farm/-/worker-farm-1.6.0.tgz#aecc405976fab5a95526180846f0dba288f3a4a0"
   dependencies:
     errno "~0.1.7"
-
-workerpool@^2.0.0:
-  version "2.3.3"
-  resolved "https://registry.yarnpkg.com/workerpool/-/workerpool-2.3.3.tgz#49a70089bd55e890d68cc836a19419451d7c81d7"
-  dependencies:
-    object-assign "4.1.1"
 
 workerpool@^2.3.0:
   version "2.3.2"
