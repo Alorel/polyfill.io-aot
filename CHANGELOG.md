@@ -1,3 +1,24 @@
+# [2.0.0](https://github.com/Alorel/polyfill.io-aot/compare/1.0.2...2.0.0) (2018-10-10)
+
+
+### Maintenance
+
+* **builder-cli:** Remove packages/builder-cli/nod_modules/json5 ([c2e66af](https://github.com/Alorel/polyfill.io-aot/commit/c2e66af))
+* **fix:** Update spawn call @ CompilePolyfillsExecutor to comply with updated Node types ([ccf4fbd](https://github.com/Alorel/polyfill.io-aot/commit/ccf4fbd))
+* Add GitHub issue templates ([1c27e74](https://github.com/Alorel/polyfill.io-aot/commit/1c27e74))
+* Drop Node 6 support ([ad70baf](https://github.com/Alorel/polyfill.io-aot/commit/ad70baf))
+* run tslint --fix for updated rules ([3300917](https://github.com/Alorel/polyfill.io-aot/commit/3300917))
+
+
+### Refactoring
+
+* Reduce polyfills method refactored for new tslint rules ([ef63fca](https://github.com/Alorel/polyfill.io-aot/commit/ef63fca))
+
+
+### BREAKING CHANGES
+
+* Droped Node 6 support
+
 ## [1.0.2](https://github.com/Alorel/polyfill.io-aot/compare/1.0.1...1.0.2) (2018-08-20)
 
 
