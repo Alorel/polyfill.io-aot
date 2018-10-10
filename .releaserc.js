@@ -2,6 +2,9 @@ const {readdirSync} = require('fs');
 const {join} = require('path');
 const pkgDir = join(__dirname, 'packages');
 
+const packageNames = readdirSync(pkgDir, 'utf8');
+packageNames.sort();
+
 const out = {
   branch: 'master',
   tagFormat: '${version}',
@@ -21,7 +24,7 @@ const out = {
         'README.md',
         'package.json',
         'yarn.lock',
-        'packages/**/package.json'
+        ...packageNames.map(pkgName => `./packages/${pkgName}/package.json`)
       ]
     }
   ],
@@ -33,14 +36,12 @@ const out = {
   ]
 };
 
-for (const pkg of readdirSync(pkgDir, 'utf8').sort()) {
+for (const pkg of packageNames) {
   out.publish.push({
     path: '@semantic-release/npm',
     pkgRoot: join(pkgDir, pkg)
   })
 }
-
-console.log(require('util').inspect(out, {colors: true, depth: null}));
 
 module.exports = out;
 

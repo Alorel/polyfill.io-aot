@@ -2,7 +2,6 @@ language: node_js
 node_js:
   - stable
   - lts/carbon
-  - lts/boron
 sudo: false
 
 env:
@@ -11,7 +10,7 @@ env:
     - GK_LOCK_YARN_OPTS=-W
 
 before_install:
-  - npm install -g yarn greenkeeper-lockfile@latest
+  - npm install -g yarn greenkeeper-lockfile
   - &prepKey if [[ $GH_TOKEN ]]; then ./prepare-gpg-key.sh; fi;
   - greenkeeper-lockfile-update
   - yarn run sync
