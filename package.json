@@ -3,6 +3,9 @@
   "version": "1.0.2",
   "description": "Combines sources from the polyfill-service package",
   "main": "index.js",
+  "engines": {
+    "node": ">=8.0"
+  },
   "publishConfig": {
     "access": "public"
   },
