@@ -1,3 +1,10 @@
+## [2.0.1](https://github.com/Alorel/polyfill.io-aot/compare/2.0.0...2.0.1) (2018-11-02)
+
+
+### Dependency updates
+
+* **package:** update node-zopfli-es to version 1.0.0 ([68a41dd](https://github.com/Alorel/polyfill.io-aot/commit/68a41dd))
+
 # [2.0.0](https://github.com/Alorel/polyfill.io-aot/compare/1.0.2...2.0.0) (2018-10-10)
 
 
