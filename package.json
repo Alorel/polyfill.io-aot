@@ -82,7 +82,7 @@
     "lodash": "^4.17.10",
     "mocha": "^5.2.0",
     "moment-timezone": "^0.5.21",
-    "node-zopfli-es": "^0.0.2",
+    "node-zopfli-es": "^1.0.0",
     "nyc": "^13.0.1",
     "ora": "^3.0.0",
     "polyfill-service": "^3.25.1",
