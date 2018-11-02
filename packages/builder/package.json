@@ -15,7 +15,7 @@
     "bluebird": "^3.0.0",
     "polyfill-service": "^3.0.0",
     "tslib": "^1.6.0",
-    "node-zopfli-es": ">=0.0.0 <1.0.0",
+    "node-zopfli-es": ">=1.0.0",
     "iltorb": "^2.0.0",
     "ora": "^3.0.0",
     "workerpool": "^2.0.0",
