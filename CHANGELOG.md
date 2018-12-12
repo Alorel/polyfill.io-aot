@@ -1,3 +1,10 @@
+## [2.0.2](https://github.com/Alorel/polyfill.io-aot/compare/2.0.1...2.0.2) (2018-12-12)
+
+
+### Dependency updates
+
+* **package:** update workerpool to version 3.0.0 ([fae88bd](https://github.com/Alorel/polyfill.io-aot/commit/fae88bd))
+
 ## [2.0.1](https://github.com/Alorel/polyfill.io-aot/compare/2.0.0...2.0.1) (2018-11-02)
 
 

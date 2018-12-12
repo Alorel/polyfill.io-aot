@@ -5,10 +5,10 @@ An AOT-bundler for [polyfill.io](https://polyfill.io)'s
 
 ![Preview](https://cdn.rawgit.com/Alorel/polyfill.io-aot/fe6db4d188c8e4206571889bb0066ac74e28605d/assets/preview.gif)
 
-[![Build Status](https://travis-ci.com/Alorel/polyfill.io-aot.svg?branch=2.0.1)](https://travis-ci.com/Alorel/polyfill.io-aot)
+[![Build Status](https://travis-ci.com/Alorel/polyfill.io-aot.svg?branch=2.0.2)](https://travis-ci.com/Alorel/polyfill.io-aot)
 [![codebeat badge](https://codebeat.co/badges/0c6bfaca-9794-4588-a017-05d88882e364)](https://codebeat.co/projects/github-com-alorel-polyfill-io-aot-master)
 [![CodeFactor](https://www.codefactor.io/repository/github/alorel/polyfill.io-aot/badge)](https://www.codefactor.io/repository/github/alorel/polyfill.io-aot)
-[![Coverage Status](https://coveralls.io/repos/github/Alorel/polyfill.io-aot/badge.svg?branch=2.0.1)](https://coveralls.io/github/Alorel/polyfill.io-aot?branch=2.0.1)
+[![Coverage Status](https://coveralls.io/repos/github/Alorel/polyfill.io-aot/badge.svg?branch=2.0.2)](https://coveralls.io/github/Alorel/polyfill.io-aot?branch=2.0.2)
 
 # Table of Contents
 
