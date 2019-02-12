@@ -1,3 +1,15 @@
+## [2.0.3](https://github.com/Alorel/polyfill.io-aot/compare/2.0.2...2.0.3) (2019-02-12)
+
+
+### Dependency updates
+
+* **package:** update yargs to version 13.1.0 ([8fb14a2](https://github.com/Alorel/polyfill.io-aot/commit/8fb14a2))
+
+
+### Maintenance
+
+* Update deps ([7738cad](https://github.com/Alorel/polyfill.io-aot/commit/7738cad))
+
 ## [2.0.2](https://github.com/Alorel/polyfill.io-aot/compare/2.0.1...2.0.2) (2018-12-12)
 
 
