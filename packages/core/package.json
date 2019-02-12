@@ -14,7 +14,7 @@
     "fs-extra": "^7.0.0",
     "iltorb": "^2.0.0",
     "typescript-lazy-get-decorator": "^1.2.0",
-    "@types/node": ">=1.0.0 <99.0.0"
+    "@types/node": ">=11.9.0"
   },
   "peerDependencies": {
     "polyfill-service": "^3.0.0"
