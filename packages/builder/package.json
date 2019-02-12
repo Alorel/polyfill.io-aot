@@ -20,7 +20,7 @@
     "ora": "^3.0.0",
     "workerpool": "^3.0.0",
     "uglify-js": "^3.4.1",
-    "@types/node": ">=1.0.0 <99.0.0",
+    "@types/node": ">=11.9.0",
     "@types/node-zopfli-es": ">=0.0.0 <1.0.0"
   },
   "peerDependencies": {
