@@ -80,7 +80,7 @@
     "iltorb": "^2.3.2",
     "json5": "^2.1.0",
     "lodash": "^4.17.10",
-    "mocha": "^5.2.0",
+    "mocha": "^6.0.0",
     "moment-timezone": "^0.5.23",
     "node-zopfli-es": "^1.0.0",
     "nyc": "^13.1.0",
