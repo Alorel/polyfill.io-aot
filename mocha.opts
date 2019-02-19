@@ -5,5 +5,7 @@
 --full-trace
 -r ts-node/register
 -r source-map-support/register
+--exclude **/_fixtures/**
+--extension ts
 --recursive
-test/**/*.ts
+test
