@@ -28,7 +28,7 @@
     "doctoc": "doctoc README.md --github",
     "tsc": "tsc",
     "typecheck": "tsc --noEmit",
-    "tsc:watch": "npm --scripts-prepend-node-path=auto run tsc --watch",
+    "tsc:watch": "npm --scripts-prepend-node-path=auto run tsc -- --watch",
     "pretest": "npm --scripts-prepend-node-path=auto run clean",
     "clean:dts": "node build/clean-extraneous-declarations.js",
     "test": "nyc mocha --opts ./mocha.opts",
@@ -38,7 +38,7 @@
   "author": "Alorel <a.molcanovas@gmail.com> (https://github.com/Alorel)",
   "license": "MIT",
   "devDependencies": {
-    "@alorel-personal/build-tools": "4.4.4",
+    "@alorel-personal/build-tools": "4.4.6",
     "@alorel-personal/conventional-changelog-alorel": "2.0.4",
     "@alorel-personal/semantic-release": "1.4.0",
     "@alorel-personal/tslint-rules": "4.1.1",
