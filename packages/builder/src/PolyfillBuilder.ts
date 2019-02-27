@@ -166,9 +166,7 @@ export class PolyfillBuilder extends EventEmitter {
       });
     });
 
-    interface Type<T extends Executor = any> {
-      new(builder: PolyfillBuilder): T;
-    }
+    type Type<T extends Executor = any> = new(builder: PolyfillBuilder) => T;
 
     for (const k of Object.keys(chain)) {
       this.once(k, () => {
