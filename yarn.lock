@@ -387,7 +387,7 @@
     "@types/node" "*"
     "@types/range-parser" "*"
 
-"@types/express@*", "@types/express@^4.16.0":
+"@types/express@*", "@types/express@^4.0.0", "@types/express@^4.16.0":
   version "4.16.1"
   resolved "https://registry.yarnpkg.com/@types/express/-/express-4.16.1.tgz#d756bd1a85c34d87eaf44c888bad27ba8a4b7cf0"
   integrity sha512-V0clmJow23WeyblmACoxbHBu2JKlE5TiIme6Lem14FnPW9gsttyHtk6wq7njcdIWH1njAaFgR8gW09lgY98gQg==
@@ -412,7 +412,7 @@
     "@types/minimatch" "*"
     "@types/node" "*"
 
-"@types/iltorb@*", "@types/iltorb@^2.0.1":
+"@types/iltorb@*", "@types/iltorb@^2.0.0", "@types/iltorb@^2.0.1":
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/@types/iltorb/-/iltorb-2.3.0.tgz#22a10a64ab48f059289ad2ec9005f2ff47656cf3"
   integrity sha512-Sa9udsJtXhLt277FDLp9kWGdfl7YGNhg5WFzBS00YEgLbQYYIAXM7zFEdaqfJ7pqQsvGzaDWpu/0Z27l95fqww==
@@ -444,14 +444,14 @@
   resolved "https://registry.yarnpkg.com/@types/mocha/-/mocha-5.2.6.tgz#b8622d50557dd155e9f2f634b7d68fd38de5e94b"
   integrity sha512-1axi39YdtBI7z957vdqXI4Ac25e7YihYQtJa+Clnxg1zTJEaIRbndt71O3sP4GAMgiAm0pY26/b9BrY4MR/PMw==
 
-"@types/moment-timezone@^0.5.6":
+"@types/moment-timezone@>=0.5.0 <1.0.0", "@types/moment-timezone@^0.5.6":
   version "0.5.10"
   resolved "https://registry.yarnpkg.com/@types/moment-timezone/-/moment-timezone-0.5.10.tgz#2b251ad454a46bdd4e3b5a5157d45059e5714799"
   integrity sha512-sSFfubyYd0Z9C89/M5wZ+GJOWNTYTPhXAB2wrzmElJcQROyWTj0y1NCLSwYqovDYeFezlFE8+aopIyZTMsDVnA==
   dependencies:
     moment ">=2.14.0"
 
-"@types/node-zopfli-es@^0.0.0":
+"@types/node-zopfli-es@>=0.0.0 <1.0.0", "@types/node-zopfli-es@^0.0.0":
   version "0.0.0"
   resolved "https://registry.yarnpkg.com/@types/node-zopfli-es/-/node-zopfli-es-0.0.0.tgz#1da8fa2fdb99eed31e90b399a1748093b3064db2"
   integrity sha512-TeXFkYJ79rJeLgTwDALnBo4Wgm44PJQ4dC7SDizFJt1eghjJKh6IetTN+lGwuGX7TTzQOFv12tKY1UHkd2mnhg==
@@ -463,6 +463,11 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-11.9.5.tgz#011eece9d3f839a806b63973e228f85967b79ed3"
   integrity sha512-vVjM0SVzgaOUpflq4GYBvCpozes8OgIIS5gVXVka+OfK3hvnkC1i93U8WiY2OtNE4XUWyyy/86Kf6e0IHTQw1Q==
 
+"@types/node@>=11.9.0":
+  version "11.10.4"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-11.10.4.tgz#3f5fc4f0f322805f009e00ab35a2ff3d6b778e42"
+  integrity sha512-wa09itaLE8L705aXd8F80jnFpxz3Y1/KRHfKsYL2bPc0XF+wEWu8sR9n5bmeu8Ba1N9z2GRNzm/YdHcghLkLKg==
+
 "@types/ora@^3.0.0":
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/@types/ora/-/ora-3.1.0.tgz#9b0c87c825a47f3b50c56ab19c2aed4565c7643b"
@@ -470,7 +475,7 @@
   dependencies:
     "@types/node" "*"
 
-"@types/polyfill-service@^3.25.0":
+"@types/polyfill-service@^3.0.0", "@types/polyfill-service@^3.25.0":
   version "3.25.0"
   resolved "https://registry.yarnpkg.com/@types/polyfill-service/-/polyfill-service-3.25.0.tgz#885e46f83a19fbe35c009f385574ecf000507615"
   integrity sha512-MUUUl+I9zRc4LTUViLAEc2Zq0So9ofFjeXeDZ3KRYbQU72IrrIpBUBf4iilBCSRRtt9cYTJtfh7/YIzRbwrl0A==
@@ -1393,7 +1398,7 @@ blocked@^1.1.0:
   resolved "https://registry.yarnpkg.com/blocked/-/blocked-1.2.1.tgz#e22efe767863c65ab8197f6252929104e1ec9ce2"
   integrity sha1-4i7+dnhjxlq4GX9iUpKRBOHsnOI=
 
-bluebird@^3.5.0, bluebird@^3.5.1, bluebird@^3.5.3:
+bluebird@^3.0.0, bluebird@^3.5.0, bluebird@^3.5.1, bluebird@^3.5.3:
   version "3.5.3"
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.5.3.tgz#7d01c6f9616c9a51ab0f8c549a79dfe6ec33efa7"
   integrity sha512-/qKPUQlaW1OyR51WeCPBvRnAlnZFUJkCSG5HzGnuIqhgyJtF+T94lFnn33eiazjRm2LAHVy2guNnaq48X9SJuw==
@@ -6556,7 +6561,7 @@ pkg-dir@^3.0.0:
   dependencies:
     find-up "^3.0.0"
 
-polyfill-service@^3.25.1:
+polyfill-service@^3.0.0, polyfill-service@^3.25.1:
   version "3.25.3"
   resolved "https://registry.yarnpkg.com/polyfill-service/-/polyfill-service-3.25.3.tgz#58708f510bf227d59e0bdb306282a88cf62dd069"
   integrity sha512-gYFh3htyCJJR/hp2GFEZB0gGfmJjtBWHaVK3uOYnp3qdyPVhD0Nbv6CFt+kDJT7Vi4eXvRwoOM/pA04NK90c3g==
