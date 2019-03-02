@@ -1,3 +1,11 @@
+## [2.0.4](https://github.com/Alorel/polyfill.io-aot/compare/2.0.3...2.0.4) (2019-03-02)
+
+
+### Maintenance
+
+* Fix tslint errors ([0c4dbae](https://github.com/Alorel/polyfill.io-aot/commit/0c4dbae))
+* Update typescript-lazy-get-decorator to lazy-get-decorator ([59b5f92](https://github.com/Alorel/polyfill.io-aot/commit/59b5f92))
+
 ## [2.0.3](https://github.com/Alorel/polyfill.io-aot/compare/2.0.2...2.0.3) (2019-02-12)
 
 

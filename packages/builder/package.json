@@ -1,12 +1,12 @@
 {
   "name": "@polyfill-io-aot/builder",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "author": "Alorel <a.molcanovas@gmail.com> (https://github.com/Alorel)",
   "license": "MIT",
   "repository": "git@github.com:Alorel/polyfill.io-aot.git",
   "main": "index.js",
   "dependencies": {
-    "@polyfill-io-aot/common": "2.0.3",
+    "@polyfill-io-aot/common": "2.0.4",
     "@types/node": ">=11.9.0",
     "@types/node-zopfli-es": ">=0.0.0 <1.0.0",
     "bluebird": "^3.0.0",
