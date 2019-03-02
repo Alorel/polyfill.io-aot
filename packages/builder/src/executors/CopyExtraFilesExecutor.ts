@@ -1,4 +1,4 @@
-import {LazyGetter} from 'typescript-lazy-get-decorator';
+import {LazyGetter} from 'lazy-get-decorator';
 import {CopyExecutor} from '../CopyExecutor';
 import {CopyPath} from '../CopyPath';
 import {BuildEvent} from '../interfaces/BuildEvent';

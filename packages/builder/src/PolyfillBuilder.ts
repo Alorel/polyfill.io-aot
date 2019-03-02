@@ -1,13 +1,13 @@
 import {DEFAULT_OUT_DIR} from '@polyfill-io-aot/common';
 import * as EventEmitter from 'events';
 import {BrotliEncodeParams} from 'iltorb';
+import {LazyGetter} from 'lazy-get-decorator';
 import merge = require('lodash/merge');
 import {Options as ZopfliOptions} from 'node-zopfli-es';
-import * as ora from 'ora';
+import * as ImportedOra from 'ora';
 import {cpus} from 'os';
 import {dirname, join} from 'path';
 import {GetPolyfillsResponse} from 'polyfill-service';
-import {LazyGetter} from 'typescript-lazy-get-decorator';
 import {CopyPath} from './CopyPath';
 import {Executor} from './Executor';
 import {BuildEvent} from './interfaces/BuildEvent';
@@ -31,24 +31,35 @@ import {
 const END_TIME = Symbol('End time');
 const START_TIME = Symbol('Start time');
 
+// They messed up the typings
+const ora: typeof ImportedOra.default = <any>ImportedOra;
+
 export class PolyfillBuilder extends EventEmitter {
 
   /** Builder configuration */
   public readonly conf: Readonly<PolyfillBuilderConfig>;
+
   /** @internal */
   public [USERAGENTS]: string[];
+
   /** @internal */
   public [COPY_FILES]: CopyPath[];
+
   /** @internal */
   public [COPY_DIRS]: CopyPath[];
+
   /** @internal */
   public [COMBO_MAP]: Map<string, GetPolyfillsResponse>;
+
   /** @internal */
   public [COMBO_HASHES]: string[];
+
   /** @internal */
   public [COMBO_HASH_UA_MAP]: { [k: string]: string };
+
   /** @internal */
   private [END_TIME]: Date;
+
   /** @internal */
   private [START_TIME]: Date;
 

@@ -79,6 +79,7 @@
     "glob": "^7.1.2",
     "iltorb": "^2.3.2",
     "json5": "^2.1.0",
+    "lazy-get-decorator": "^2.0.0",
     "lodash": "^4.17.10",
     "mocha": "^6.0.0",
     "moment-timezone": "^0.5.23",
@@ -93,7 +94,6 @@
     "ts-node": "^8.0.2",
     "tslib": "^1.9.1",
     "typescript": "^3.2.4",
-    "typescript-lazy-get-decorator": "^1.2.0",
     "uglify-js": "^3.4.1",
     "workerpool": "^3.0.0",
     "yargs": "^13.1.0"
@@ -115,11 +115,11 @@
     "fs-extra": "^7.0.0",
     "iltorb": "^2.0.0",
     "json5": "^2.1.0",
+    "lazy-get-decorator": "^2.0.0",
     "lodash": "^4.0.0",
     "node-zopfli-es": "^1.0.0",
     "polyfill-service": "^3.0.0",
     "tslib": "^1.6.0",
-    "typescript-lazy-get-decorator": "^1.2.0",
     "workerpool": "^3.0.0",
     "yargs": "^13.1.0"
   }

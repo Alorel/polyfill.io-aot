@@ -1,4 +1,4 @@
-import {LazyGetter} from 'typescript-lazy-get-decorator';
+import {LazyGetter} from 'lazy-get-decorator';
 import theSuperiorMobileOS = require('./android');
 import _bb = require('./bb');
 import _chrome = require('./chrome');

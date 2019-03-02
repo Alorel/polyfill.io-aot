@@ -1,10 +1,13 @@
-import * as ora from 'ora';
-import {LazyGetter} from 'typescript-lazy-get-decorator';
+import {LazyGetter} from 'lazy-get-decorator';
+import * as ImportedOra from 'ora';
 import {BuildEvent} from './interfaces/BuildEvent';
 import {PolyfillBuilderConfig} from './interfaces/PolyfillBuilderConfig';
 import {PolyfillBuilder} from './PolyfillBuilder';
 
 const $builder = Symbol('builder');
+
+// They messed up the typings
+const ora: typeof ImportedOra.default = <any>ImportedOra;
 
 //tslint:disable:no-empty
 

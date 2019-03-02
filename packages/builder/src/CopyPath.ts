@@ -1,5 +1,5 @@
+import {LazyGetter} from 'lazy-get-decorator';
 import {relative as relative$} from 'path';
-import {LazyGetter} from 'typescript-lazy-get-decorator';
 
 /** @internal */
 export class CopyPath {
