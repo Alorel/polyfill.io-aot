@@ -17,7 +17,7 @@
     "tslib": "^1.6.0",
     "node-zopfli-es": "^1.0.0",
     "iltorb": "^2.0.0",
-    "ora": "^3.0.0",
+    "ora": "^3.2.0",
     "workerpool": "^3.0.0",
     "uglify-js": "^3.4.1",
     "@types/node": ">=11.9.0",
