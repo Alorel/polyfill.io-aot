@@ -31,7 +31,7 @@
     "tsc:watch": "npm --scripts-prepend-node-path=auto run tsc -- --watch",
     "pretest": "npm --scripts-prepend-node-path=auto run clean",
     "clean:dts": "node build/clean-extraneous-declarations.js",
-    "test": "nyc mocha --opts ./mocha.opts",
+    "test": "nyc mocha --opts ./mocha.opts test",
     "tslint": "alo tslint -p ./tsconfig.json ",
     "tslint:fix": "npm --scripts-prepend-node-path=auto run tslint -- --fix"
   },
