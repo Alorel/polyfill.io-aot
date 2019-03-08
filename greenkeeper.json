@@ -10,5 +10,8 @@
         "packages/express/package.json"
       ]
     }
-  }
+  },
+  "ignore": [
+    "ts-node"
+  ]
 }

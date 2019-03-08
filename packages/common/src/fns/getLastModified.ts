@@ -1,4 +1,5 @@
-import * as moment from 'moment-timezone';
+import * as moment from 'moment';
+import 'moment-timezone';
 
 /** Get a formatted Last-modified header string */
 export function getLastModified(d: moment.MomentInput = new Date()): string {
