@@ -89,7 +89,7 @@
     "polyfill-service": "^3.25.1",
     "semantic-release": "^15.13.3",
     "source-map-support": "^0.5.10",
-    "supertest": "^3.4.2",
+    "supertest": "^4.0.0",
     "tmp": "^0.0.33",
     "ts-node": "^7.0.1",
     "tslib": "^1.9.1",
