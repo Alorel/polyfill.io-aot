@@ -1,8 +1,8 @@
+import {Features, getPolyfillString, Unknown} from '@polyfill-io-aot/common';
 import {md5Array} from '@polyfill-io-aot/common/src/fns/md5Hash';
 import * as fs from 'fs-extra';
 import noop = require('lodash/noop');
 import {join} from 'path';
-import {Features, getPolyfillString, Unknown} from 'polyfill-service';
 import * as wp from 'workerpool';
 import {reviver} from '../Serialiser';
 

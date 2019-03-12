@@ -8,7 +8,7 @@ export const COPY_FILES = Symbol('Copied files');
 export const USERAGENTS = Symbol('Useragents');
 
 /** @internal */
-export const POLYFILL_SERVICE_PKG = Symbol('Polyfill service package');
+export const POLYFILL_LIBRARY_PKG = Symbol('Polyfill library package');
 
 /** @internal */
 export const POLYFILLS_ROOT = Symbol('Polyfill package root');

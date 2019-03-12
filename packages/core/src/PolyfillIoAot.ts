@@ -1,6 +1,7 @@
 import {DEFAULT_OUT_DIR, Manifest} from '@polyfill-io-aot/common';
 import {md5Object} from '@polyfill-io-aot/common/src/fns/md5Hash';
 import {reducePolyfills} from '@polyfill-io-aot/common/src/fns/reducePolyfills';
+import * as lib from '@polyfill-io-aot/common/src/PolyfillLibrary';
 import {PolyfillBuffer} from '@polyfill-io-aot/core/src/PolyfillBuffer';
 import * as etag from 'etag';
 import * as EventEmitter from 'events';
@@ -10,7 +11,6 @@ import {LazyGetter} from 'lazy-get-decorator';
 import merge = require('lodash/merge');
 import * as moment from 'moment';
 import {join} from 'path';
-import * as svc from 'polyfill-service';
 import * as zlib from 'zlib';
 import {Compression} from './Compression';
 import {PolyfillCoreConfig} from './PolyfillCoreConfig';
@@ -92,7 +92,7 @@ export class PolyfillIoAot extends EventEmitter {
   }
 
   @LazyGetter()
-  private get features(): Readonly<svc.Features> {
+  private get features(): Readonly<lib.Features> {
     return Object.freeze(reducePolyfills(this.conf.polyfills));
   }
 
@@ -112,13 +112,13 @@ export class PolyfillIoAot extends EventEmitter {
    * @param [compression=Compression.NONE] Compression level
    */
   public getPolyfills(uaString: string, compression: Compression = Compression.NONE): Promise<PolyfillBuffer> {
-    return svc
+    return lib
       .getPolyfills({
         excludes: this.conf.excludes,
         features: this.features,
         uaString
       })
-      .then((polyfills: svc.GetPolyfillsResponse): Promise<PolyfillBuffer> => {
+      .then((polyfills: lib.GetPolyfillsResponse): Promise<PolyfillBuffer> => {
         return this.onGetPolyfills(uaString, polyfills, compression);
       });
   }
@@ -134,7 +134,7 @@ export class PolyfillIoAot extends EventEmitter {
   }
 
   private generatePolyfills(uaString: string, compression: Compression, hash: string): Promise<PolyfillBuffer> {
-    return svc
+    return lib
       .getPolyfillString({
         excludes: this.conf.excludes,
         features: this.features,
@@ -174,7 +174,7 @@ export class PolyfillIoAot extends EventEmitter {
   }
 
   private onGetPolyfills(uaString: string,
-                         polyfills: svc.GetPolyfillsResponse,
+                         polyfills: lib.GetPolyfillsResponse,
                          compression: Compression): Promise<PolyfillBuffer> {
     const hash: string = md5Object(polyfills);
 

@@ -1,4 +1,4 @@
-import {Features, PolyfillFlag} from 'polyfill-service';
+import {Features, PolyfillFlag} from '../PolyfillLibrary';
 
 /** @internal */
 export function reducePolyfills(features: string[], flags: PolyfillFlag[] = []): Features {

@@ -1,4 +1,4 @@
-import {DEFAULT_OUT_DIR} from '@polyfill-io-aot/common';
+import {DEFAULT_OUT_DIR, GetPolyfillsResponse} from '@polyfill-io-aot/common';
 import * as EventEmitter from 'events';
 import {BrotliEncodeParams} from 'iltorb';
 import {LazyGetter} from 'lazy-get-decorator';
@@ -7,7 +7,6 @@ import {Options as ZopfliOptions} from 'node-zopfli-es';
 import * as ImportedOra from 'ora';
 import {cpus} from 'os';
 import {dirname, join} from 'path';
-import {GetPolyfillsResponse} from 'polyfill-service';
 import {CopyPath} from './CopyPath';
 import {Executor} from './Executor';
 import {BuildEvent} from './interfaces/BuildEvent';
@@ -23,7 +22,7 @@ import {
   COMBO_MAP,
   COPY_DIRS,
   COPY_FILES,
-  POLYFILL_SERVICE_PKG,
+  POLYFILL_LIBRARY_PKG,
   POLYFILLS_ROOT,
   USERAGENTS
 } from './symbols';
@@ -124,14 +123,14 @@ export class PolyfillBuilder extends EventEmitter {
 
   /** @internal */
   @LazyGetter(true)
-  public get [POLYFILL_SERVICE_PKG](): string {
-    return dirname(require.resolve('polyfill-service/package.json'));
+  public get [POLYFILL_LIBRARY_PKG](): string {
+    return dirname(require.resolve('polyfill-library/package.json'));
   }
 
   /** @internal */
   @LazyGetter(true)
   public get [POLYFILLS_ROOT](): string {
-    return join(this[POLYFILL_SERVICE_PKG], 'polyfills');
+    return join(this[POLYFILL_LIBRARY_PKG], 'polyfills');
   }
 
   /**
@@ -146,6 +145,7 @@ export class PolyfillBuilder extends EventEmitter {
       return Promise.reject(err);
     } else {
       const out = this.promise;
+
       this.initChain();
 
       setImmediate(() => {

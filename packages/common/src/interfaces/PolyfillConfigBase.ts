@@ -1,5 +1,5 @@
 import {BrotliEncodeParams} from 'iltorb';
-import {PolyfillFlag, Unknown} from 'polyfill-service';
+import {PolyfillFlag, Unknown} from '../PolyfillLibrary';
 
 export interface PolyfillConfigBase {
   /**
@@ -13,7 +13,7 @@ export interface PolyfillConfigBase {
    */
   excludes: string[];
   /**
-   * Flags to pass to polyfill-service when generating bundles
+   * Flags to pass to polyfill-library when generating bundles
    * @default []
    */
   flags: PolyfillFlag[];

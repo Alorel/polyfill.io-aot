@@ -5,7 +5,7 @@ import {CopyPath} from '../../packages/builder/src/CopyPath';
 describe('Builder.CopyPath', () => {
   let cp: CopyPath;
 
-  before(() => {
+  before('Init copy path', () => {
     cp = new CopyPath('/foo/bar/qux/baz', '/foo/bar');
   });
 

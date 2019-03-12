@@ -1,7 +1,7 @@
+import {Features, getPolyfills, GetPolyfillsResponse} from '@polyfill-io-aot/common';
 import {md5Object} from '@polyfill-io-aot/common/src/fns/md5Hash';
 import {reducePolyfills} from '@polyfill-io-aot/common/src/fns/reducePolyfills';
 import * as Bluebird from 'bluebird';
-import {Features, getPolyfills, GetPolyfillsResponse} from 'polyfill-service';
 import {Executor} from '../Executor';
 import {BuildEvent} from '../interfaces/BuildEvent';
 import {COMBO_HASH_UA_MAP, COMBO_HASHES, COMBO_MAP, USERAGENTS} from '../symbols';

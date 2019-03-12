@@ -36,7 +36,7 @@ export const args: Args = <any>yargs
     alias: 'd',
     array: true,
     defaultDescription: '[]',
-    desc: 'Additional directories containing your own polyfills in the polyfill-service format.'
+    desc: 'Additional directories containing your own polyfills in the polyfill-library format.'
   })
   .option('excludes', {
     alias: 'e',
@@ -49,7 +49,7 @@ export const args: Args = <any>yargs
     array: true,
     choices: ['gated', 'always'],
     defaultDescription: '[]',
-    desc: 'Flags to pass to polyfill-service when generating bundles.'
+    desc: 'Flags to pass to polyfill-library when generating bundles.'
   })
   .option('out', {
     alias: 'o',

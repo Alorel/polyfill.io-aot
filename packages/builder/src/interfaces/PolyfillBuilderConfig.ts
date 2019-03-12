@@ -24,8 +24,8 @@ export interface UserAgentGenerators {
 /** Builder configuration */
 export interface PolyfillBuilderConfig extends PolyfillConfigBase {
   /**
-   * Additional directories containing your own polyfills in the polyfill-service format.
-   * @see https://github.com/Financial-Times/polyfill-service/tree/v3.25.1/polyfills
+   * Additional directories containing your own polyfills in the polyfill-library format.
+   * @see https://github.com/Financial-Times/polyfill-library/tree/1b3b661253ba375ca357d8d097a1586351cf439f/polyfills
    * @see https://polyfill.io/v2/docs/contributing/authoring-polyfills
    * @default []
    */

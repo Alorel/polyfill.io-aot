@@ -17,7 +17,7 @@
     "tslib": "^1.6.0"
   },
   "peerDependencies": {
-    "polyfill-service": "^3.0.0"
+    "polyfill-library": "^3.31.0"
   },
   "author": "Alorel <a.molcanovas@gmail.com> (https://github.com/Alorel)",
   "publishConfig": {
@@ -27,8 +27,8 @@
     "polyfill",
     "bundler",
     "polyfill.io",
-    "polyfill-service",
-    "polyfill service",
+    "polyfill-library",
+    "polyfill library",
     "aot",
     "polyfill bundler"
   ]

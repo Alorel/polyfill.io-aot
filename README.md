@@ -1,7 +1,7 @@
 # polyfill.io AOT
 
 An AOT-bundler for [polyfill.io](https://polyfill.io)'s
-[polyfill-service](https://www.npmjs.com/package/polyfill-service) package.
+[polyfill-library](https://www.npmjs.com/package/polyfill-library) package.
 
 ![Preview](https://cdn.rawgit.com/Alorel/polyfill.io-aot/fe6db4d188c8e4206571889bb0066ac74e28605d/assets/preview.gif)
 
@@ -33,11 +33,8 @@ An AOT-bundler for [polyfill.io](https://polyfill.io)'s
 
 # Prerequisites
 
-    npm install polyfill-service
-    
-Note: If you're using Node >=10.0 you need to pass the `--build-from-source parameter` to `npm install`
-because of the `polyfill-service`'s `node-zopfli` dependency. `--ignore-engines` *may* be necessary as `polyfill-service`
-lists the `node` requirement as `6.11.1 - 9` at the time of writing.
+    npm install polyfill-library
+
 
 [^Table of Contents](#table-of-contents)
 
@@ -74,9 +71,9 @@ builder.start()
 | **Option**     	| **Default value**                           	| **Description**                                                                                                                                                                                                                                      	|
 |----------------	|---------------------------------------------	|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	|
 | brotli         	| `{quality: 11}`                             	| Options to pass to the [iltorb module](https://github.com/MayhemYDG/iltorb/tree/503179e69762b3f11d7c3c1c8f116da081255d7e#brotliencodeparams)                                                                                                          |
-| dirs           	| `[]`                                        	| Additional directories containing your own polyfills in the polyfill-service format. See [here](https://github.com/Financial-Times/polyfill-service/tree/v3.25.1/polyfills) and [here](https://polyfill.io/v2/docs/contributing/authoring-polyfills) 	|
+| dirs           	| `[]`                                        	| Additional directories containing your own polyfills in the polyfill-library format. See [here](https://github.com/Financial-Times/polyfill-library/tree/1b3b661253ba375ca357d8d097a1586351cf439f/polyfills) and [here](https://polyfill.io/v2/docs/contributing/authoring-polyfills) 	|
 | excludes       	| `[]`                                        	| Array of polyfills to exclude from the final bundle                                                                                                                                                                                                  	|
-| flags          	| `[]`                                        	| Flags to pass to polyfill-service when generating bundles. Options: `gated` and `always`.                                                                                                                                                            	|
+| flags          	| `[]`                                        	| Flags to pass to polyfill-library when generating bundles. Options: `gated` and `always`.                                                                                                                                                            	|
 | outDir         	| ~/.polyfill-io-aot/.polyfills               	| Output directory                                                                                                                                                                                                                                     	|
 | packageManager 	| npm                                         	| The package manager to use when spawning processes. Options: `npm`, `yarn`                                                                                                                                                                           	|
 | polyfills      	| `['default']`                               	| Polyfills to consider (including aliases)                                                                                                                                                                                                            	|
@@ -128,10 +125,10 @@ import {BuildEvent} from '@polyfill-io-aot/builder';
 | COMPILE_POLYFILLS_BEGIN   	|                                   	| Generating polyfill strings step began                                                          	|
 | COMPILE_POLYFILLS_OK      	|                                   	| Generating polyfill strings step succeeded                                                      	|
 | COMPILE_POLYFILLS_ERR     	|                                   	| Generating polyfill strings step errored                                                        	|
-| COPY_EXTRA_DIRS_BEGIN     	|                                   	| Copying of directories from the `dirs` option to the `polyfill-service` package began.          	|
-| COPY_EXTRA_DIRS_OK        	|                                   	| Copying of directories from the `dirs` option to the `polyfill-service` package succeeded.      	|
-| COPY_EXTRA_FILES_BEGIN    	|                                   	| Copying of additional files from the `dirs` option to the `polyfill-service` package began.     	|
-| COPY_EXTRA_FILES_OK       	|                                   	| Copying of additional files from the `dirs` option to the `polyfill-service` package succeeded. 	|
+| COPY_EXTRA_DIRS_BEGIN     	|                                   	| Copying of directories from the `dirs` option to the `polyfill-library` package began.          	|
+| COPY_EXTRA_DIRS_OK        	|                                   	| Copying of directories from the `dirs` option to the `polyfill-library` package succeeded.      	|
+| COPY_EXTRA_FILES_BEGIN    	|                                   	| Copying of additional files from the `dirs` option to the `polyfill-library` package began.     	|
+| COPY_EXTRA_FILES_OK       	|                                   	| Copying of additional files from the `dirs` option to the `polyfill-library` package succeeded. 	|
 | COPY_EXTRA_DIR_BEGIN      	| from (string), to (string)        	|                                                                                                 	|
 | COPY_EXTRA_DIR_OK         	| from (string), to (string)        	|                                                                                                 	|
 | COPY_EXTRA_DIR_ERR        	| from (string), to (string), Error 	|                                                                                                 	|
@@ -198,9 +195,9 @@ function* uaGenerator() {
   
     Inline config:
       --brotli, -b     Options to pass to the iltorb module (JSON5).                                                                                                    [string] [default: {quality: 11}]
-      --dirs, -d       Additional directories containing your own polyfills in the polyfill-service format.                                                                         [array] [default: []]
+      --dirs, -d       Additional directories containing your own polyfills in the polyfill-library format.                                                                         [array] [default: []]
       --excludes, -e   Array of polyfills to exclude from the final bundle.                                                                                                         [array] [default: []]
-      --flags, -f      Flags to pass to polyfill-service when generating bundles.                                                                      [array] [choices: "gated", "always"] [default: []]
+      --flags, -f      Flags to pass to polyfill-library when generating bundles.                                                                      [array] [choices: "gated", "always"] [default: []]
       --polyfills, -p  Polyfills to consider                                                                                                                               [array] [default: ['default']]
       --processes, -r  Number of processes to spawn for compression and polyfill bundle generation.                                                    [number] [default: Math.max(1, NUM_CPU_CORES - 1)]
       --unknown, -u    What to do when the user agent cannot be recognised                                                                   [string] [choices: "polyfill", "ignore"] [default: polyfill]
