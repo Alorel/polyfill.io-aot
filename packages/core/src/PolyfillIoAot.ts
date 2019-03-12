@@ -8,7 +8,7 @@ import {readFile, readFileSync} from 'fs-extra';
 import * as brotli from 'iltorb';
 import {LazyGetter} from 'lazy-get-decorator';
 import merge = require('lodash/merge');
-import * as moment from 'moment-timezone';
+import * as moment from 'moment';
 import {join} from 'path';
 import * as svc from 'polyfill-service';
 import * as zlib from 'zlib';
