@@ -1,12 +1,12 @@
 {
   "name": "@polyfill-io-aot/express",
-  "version": "2.0.4",
+  "version": "3.0.0",
   "author": "Alorel <a.molcanovas@gmail.com> (https://github.com/Alorel)",
   "license": "MIT",
   "repository": "git@github.com:Alorel/polyfill.io-aot.git",
   "main": "index.js",
   "dependencies": {
-    "@polyfill-io-aot/core": "2.0.4",
+    "@polyfill-io-aot/core": "3.0.0",
     "@types/express": "^4.0.0"
   },
   "publishConfig": {

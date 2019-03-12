@@ -1,3 +1,25 @@
+# [3.0.0](https://github.com/Alorel/polyfill.io-aot/compare/2.0.4...3.0.0) (2019-03-12)
+
+
+### Bug Fixes
+
+* Fixed typescript moment-timezone imports ([0349eb2](https://github.com/Alorel/polyfill.io-aot/commit/0349eb2)), closes [#73](https://github.com/Alorel/polyfill.io-aot/issues/73) [#72](https://github.com/Alorel/polyfill.io-aot/issues/72)
+
+
+### Maintenance
+
+* Replaced polyfill-service with polyfill-library ([b678fac](https://github.com/Alorel/polyfill.io-aot/commit/b678fac))
+
+
+### Tests
+
+* Fixed fixture dependencies ([c5cfd64](https://github.com/Alorel/polyfill.io-aot/commit/c5cfd64))
+
+
+### BREAKING CHANGES
+
+* The peer dependency polyfill-service has changed to polyfill-library.
+
 ## [2.0.4](https://github.com/Alorel/polyfill.io-aot/compare/2.0.3...2.0.4) (2019-03-02)
 
 
