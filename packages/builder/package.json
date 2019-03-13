@@ -7,7 +7,7 @@
   "main": "index.js",
   "dependencies": {
     "@polyfill-io-aot/common": "3.0.0",
-    "@types/node": ">=11.9.0",
+    "@types/node": ">=11.11.2",
     "@types/node-zopfli-es": ">=0.0.0 <1.0.0",
     "bluebird": "^3.0.0",
     "cross-spawn": "^6.0.0",
