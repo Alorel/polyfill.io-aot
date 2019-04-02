@@ -21,8 +21,7 @@ describe('core.PolyfillIoAot', () => {
   const lastModifiedRe = /^[A-Z][a-z]{2},\s\d{2}\s[A-Z][a-z]{2}\s\d{4}\s\d{2}:\d{2}:\d{2}\sGMT$/;
 
   function mkTmpDir(): string {
-    const opts: tmp.Options = {
-      discardDescriptor: true,
+    const opts: tmp.DirOptions = {
       unsafeCleanup: true
     };
 

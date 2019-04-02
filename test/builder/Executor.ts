@@ -48,8 +48,7 @@ describe('Executors', () => {
   let outDir: string;
 
   function mkTmpDir(): string {
-    const opts: tmp.Options = {
-      discardDescriptor: true,
+    const opts: tmp.DirOptions = {
       unsafeCleanup: true
     };
 

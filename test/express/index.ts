@@ -17,8 +17,7 @@ describe('express', () => {
   const vary = 'user-agent, accept-encoding';
 
   function mkTmpDir(): string {
-    const opts: tmp.Options = {
-      discardDescriptor: true,
+    const opts: tmp.DirOptions = {
       unsafeCleanup: true
     };
 

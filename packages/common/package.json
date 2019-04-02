@@ -6,9 +6,9 @@
   "repository": "git@github.com:Alorel/polyfill.io-aot.git",
   "main": "index.js",
   "dependencies": {
-    "@types/iltorb": "^2.0.0",
+    "@types/iltorb": "^2.3.0",
     "@types/moment-timezone": ">=0.5.0 <1.0.0",
-    "moment-timezone": "^0.5.23"
+    "moment-timezone": "~0.5.23"
   },
   "publishConfig": {
     "access": "public"

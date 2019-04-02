@@ -2,6 +2,8 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
+    "incremental": true,
+    "tsBuildInfoFile": "./.tsbuildinfo",
     "sourceMap": true,
     "stripInternal": true,
     "declaration": true,

@@ -24,6 +24,7 @@ const out = {
         'README.md',
         'package.json',
         'yarn.lock',
+        '.tsbuildinfo',
         ...packageNames.map(pkgName => `./packages/${pkgName}/package.json`)
       ]
     }
