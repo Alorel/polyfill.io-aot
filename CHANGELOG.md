@@ -1,3 +1,10 @@
+## [3.0.1](https://github.com/Alorel/polyfill.io-aot/compare/3.0.0...3.0.1) (2019-04-02)
+
+
+### Bug Fixes
+
+* Updated dependencies ([0851eb9](https://github.com/Alorel/polyfill.io-aot/commit/0851eb9))
+
 # [3.0.0](https://github.com/Alorel/polyfill.io-aot/compare/2.0.4...3.0.0) (2019-03-12)
 
 
