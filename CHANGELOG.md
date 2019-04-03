@@ -1,3 +1,15 @@
+## [3.0.2](https://github.com/Alorel/polyfill.io-aot/compare/3.0.1...3.0.2) (2019-04-03)
+
+
+### Dependency updates
+
+* **package:** update ora to version 3.4.0 ([96e5d05](https://github.com/Alorel/polyfill.io-aot/commit/96e5d05))
+
+
+### Maintenance
+
+* Ignore .tsbuildinfo ([1150f34](https://github.com/Alorel/polyfill.io-aot/commit/1150f34))
+
 ## [3.0.1](https://github.com/Alorel/polyfill.io-aot/compare/3.0.0...3.0.1) (2019-04-02)
 
 
