@@ -2,7 +2,6 @@ import * as Bluebird from 'bluebird';
 import {expect} from 'chai';
 import {Stats} from 'fs';
 import * as fs from 'fs-extra';
-import * as iltorb from 'iltorb';
 import {before, describe, it} from 'mocha';
 import {join, resolve as resolve$} from 'path';
 import * as tmp from 'tmp';
@@ -79,7 +78,7 @@ describe('Executors', () => {
     before('run', () => {
       pb = new PolyfillBuilder({
         brotli: {
-          quality: 1
+          [zlib.constants.BROTLI_PARAM_QUALITY]: zlib.constants.BROTLI_MIN_QUALITY
         },
         dirs: [polyFixtureDir],
         outDir,
@@ -318,7 +317,7 @@ describe('Executors', () => {
           .then((original: string) => {
             return fs.readFile(join(outDir, `${hash}.js.br`))
               .then((buf: Buffer) => new Promise((resolve, reject) => {
-                iltorb.decompress(buf, (e, result) => {
+                zlib.brotliDecompress(buf, (e, result) => {
                   if (e) {
                     reject(e);
                   } else {

@@ -28,8 +28,8 @@ export const args: Args = <any>yargs
   .option('brotli', {
     alias: 'b',
     coerce: json5Parse,
-    defaultDescription: '{quality: 11}',
-    desc: 'Options to pass to the iltorb module (JSON5).',
+    defaultDescription: '{[zlib.constants.BROTLI_PARAM_QUALITY]: zlib.constants.BROTLI_MIN_QUALITY}',
+    desc: 'Options to pass to the Brotli encoder (JSON5).',
     string: true
   })
   .option('dirs', {

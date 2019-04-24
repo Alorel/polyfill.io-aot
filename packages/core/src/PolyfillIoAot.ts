@@ -6,7 +6,6 @@ import {PolyfillBuffer} from '@polyfill-io-aot/core/src/PolyfillBuffer';
 import * as etag from 'etag';
 import * as EventEmitter from 'events';
 import {readFile, readFileSync} from 'fs-extra';
-import * as brotli from 'iltorb';
 import {LazyGetter} from 'lazy-get-decorator';
 import merge = require('lodash/merge');
 import * as moment from 'moment';
@@ -14,6 +13,10 @@ import {join} from 'path';
 import * as zlib from 'zlib';
 import {Compression} from './Compression';
 import {PolyfillCoreConfig} from './PolyfillCoreConfig';
+
+import BrotliOptions = zlib.BrotliOptions;
+
+const {brotliCompress, constants} = zlib;
 
 const $cfg = Symbol('Config');
 
@@ -27,9 +30,9 @@ function compressCallback(resolve: (b: Buffer) => void, reject: (e: Error) => vo
   };
 }
 
-function compressBrotli(buf: Buffer, opts: brotli.BrotliEncodeParams): Promise<Buffer> {
+function compressBrotli(buf: Buffer, opts: BrotliOptions['params']): Promise<Buffer> {
   return new Promise<Buffer>((resolve, reject): void => {
-    brotli.compress(buf, opts, compressCallback(resolve, reject));
+    brotliCompress(buf, opts, compressCallback(resolve, reject));
   });
 }
 
@@ -65,7 +68,7 @@ export class PolyfillIoAot extends EventEmitter {
     super();
     const defaultCfg: PolyfillCoreConfig = {
       brotli: {
-        quality: 11
+        [constants.BROTLI_PARAM_QUALITY]: constants.BROTLI_MAX_QUALITY
       },
       excludes: [],
       flags: [],

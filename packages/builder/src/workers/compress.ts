@@ -1,7 +1,7 @@
 import * as fs from 'fs-extra';
-import * as iltorb from 'iltorb';
 import * as zopfli from 'node-zopfli-es';
 import * as wp from 'workerpool';
+import {brotliCompress, BrotliOptions} from 'zlib';
 import resolveSourcePath = require('./util/resolveSourcePath');
 
 function write(path: string): (inp: Buffer) => Promise<void> {
@@ -19,17 +19,17 @@ export function gzip(root: string, hash: string, opts: zopfli.Options): Promise<
 }
 
 /** @internal */
-export function brotli(root: string, hash: string, opts: iltorb.BrotliEncodeParams): Promise<void> {
+export function brotli(root: string, hash: string, opts: BrotliOptions['params']): Promise<void> {
   const path: string = resolveSourcePath(root, hash);
   const out = `${path}.br`;
 
   return fs.readFile(path)
     .then((sourceBuf: Buffer) => new Promise<Buffer>((resolve, reject) => {
-      iltorb.compress(sourceBuf, opts, (err: any, res: Buffer): void => {
-        if (err) {
-          reject(err);
+      brotliCompress(sourceBuf, {params: opts}, (error, result) => {
+        if (error) {
+          reject(error);
         } else {
-          resolve(res);
+          resolve(result);
         }
       });
     }))

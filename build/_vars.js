@@ -13,7 +13,8 @@ const syncedKeys = [
   'repository',
   'main',
   'publishConfig',
-  'keywords'
+  'keywords',
+  'engines'
 ];
 
 module.exports = {

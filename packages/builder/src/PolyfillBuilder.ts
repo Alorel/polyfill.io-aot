@@ -1,12 +1,12 @@
 import {DEFAULT_OUT_DIR, GetPolyfillsResponse} from '@polyfill-io-aot/common';
 import * as EventEmitter from 'events';
-import {BrotliEncodeParams} from 'iltorb';
 import {LazyGetter} from 'lazy-get-decorator';
 import merge = require('lodash/merge');
 import {Options as ZopfliOptions} from 'node-zopfli-es';
 import * as ImportedOra from 'ora';
 import {cpus} from 'os';
 import {dirname, join} from 'path';
+import {BrotliOptions, constants} from 'zlib';
 import {CopyPath} from './CopyPath';
 import {Executor} from './Executor';
 import {BuildEvent} from './interfaces/BuildEvent';
@@ -69,14 +69,14 @@ export class PolyfillBuilder extends EventEmitter {
   public constructor(conf?: PartialPolyfillBuilderConfig) {
     super();
     type Defaults = Omit<PolyfillBuilderConfig, 'uaGenerators' | 'zopfli' | 'brotli'> & {
-      brotli: Partial<BrotliEncodeParams>;
+      brotli: Partial<BrotliOptions['params']>;
       uaGenerators: {};
       zopfli: Partial<ZopfliOptions>;
     };
 
     const defaults: Defaults = {
       brotli: {
-        quality: 11
+        [constants.BROTLI_PARAM_QUALITY]: constants.BROTLI_MAX_QUALITY
       },
       dirs: [],
       excludes: [],

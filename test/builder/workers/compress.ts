@@ -1,11 +1,13 @@
 import {expect} from 'chai';
 import * as fs from 'fs-extra';
-import * as iltorb from 'iltorb';
 import {before, describe, it} from 'mocha';
 import {join} from 'path';
 import * as tmp from 'tmp';
 import * as zlib from 'zlib';
 import {brotli, gzip} from '../../../packages/builder/src/workers/compress';
+
+const {brotliDecompress} = zlib;
+const {BROTLI_PARAM_QUALITY} = zlib.constants;
 
 tmp.setGracefulCleanup();
 
@@ -44,14 +46,12 @@ describe('Builder.workers.compress', () => {
   });
 
   describe('Brotli', () => {
-    before(() => {
-      return brotli(dir, 'foo', {quality: 1});
-    });
+    before(() => brotli(dir, 'foo', {[BROTLI_PARAM_QUALITY]: 1}));
 
     it('Should have the same contents', () => {
       return fs.readFile(join(dir, 'foo.js.br'))
         .then((buf: Buffer) => new Promise((resolve, reject) => {
-          iltorb.decompress(buf, ((err, output) => {
+          brotliDecompress(buf, ((err, output) => {
             if (err) {
               reject(err);
             } else {

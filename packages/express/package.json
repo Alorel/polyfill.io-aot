@@ -20,5 +20,8 @@
     "polyfill library",
     "aot",
     "polyfill bundler"
-  ]
+  ],
+  "engines": {
+    "node": ">=11.7.0"
+  }
 }
