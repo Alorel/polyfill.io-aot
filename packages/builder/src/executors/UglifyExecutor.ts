@@ -23,13 +23,11 @@ class UglifyExecutor extends PoolExecutor {
     this._total = this.builder[COMBO_HASHES].length;
     this._complete = 0;
     this._ora.start('Minifying compiled bundles');
-    this._initPool(require.resolve('../workers/uglify-js'));
+    this._initPool(require.resolve('../workers/terser'));
     let te: Error;
 
     Bluebird
-      .map(this.builder[COMBO_HASHES], (hash: string) => {
-        return this.map(hash);
-      })
+      .map(this.builder[COMBO_HASHES], this.map.bind(this))
       .then(
         () => {
           this.emit(BuildEvent.UGLIFY_ALL_OK);

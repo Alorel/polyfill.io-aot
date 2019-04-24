@@ -514,13 +514,6 @@
   resolved "https://registry.yarnpkg.com/@types/tmp/-/tmp-0.1.0.tgz#19cf73a7bcf641965485119726397a096f0049bd"
   integrity sha512-6IwZ9HzWbCq6XoQWhxLpDjuADodH/MKXRUIDFudvgjcVdjFknvmR+DNsoUeer4XPrEnrZs04Jj+kfV9pFsrhmA==
 
-"@types/uglify-js@~3.0.2":
-  version "3.0.4"
-  resolved "https://registry.yarnpkg.com/@types/uglify-js/-/uglify-js-3.0.4.tgz#96beae23df6f561862a830b4288a49e86baac082"
-  integrity sha512-SudIN9TRJ+v8g5pTG8RRCqfqTMNqgWCKKd3vtynhGzkIIjxaicNAMuY5TRadJ6tzDu3Dotf3ngaMILtmOdmWEQ==
-  dependencies:
-    source-map "^0.6.1"
-
 "@types/workerpool@~2.3.0":
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/@types/workerpool/-/workerpool-2.3.0.tgz#2a011a742e415d98d4a9fc8d9adcff23166f8485"
@@ -1356,7 +1349,7 @@ commander@2.19.0:
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.19.0.tgz#f6198aa84e5b83c46054b94ddedbfed5ee9ff12a"
   integrity sha512-6tvAOO+D6OENvRAh524Dh9jcfKTYDQAqvqezbCW82xj5X0pSrcpxtvRKHLG0yBY6SD7PSDrJaj+0AiOcKVd1Xg==
 
-commander@^2.12.1, commander@~2.20.0:
+commander@^2.12.1, commander@^2.19.0, commander@~2.20.0:
   version "2.20.0"
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.20.0.tgz#d58bb2b5c1ee8f87b0d340027e9e94e222c5a422"
   integrity sha512-7j2y+40w61zy6YC2iRNpUe/NwhNyoXrYpHMrSunaMG64nRnaf96zO/KMQR4OyN/UnE5KLyEBnKHd4aG3rskjpQ==
@@ -6234,6 +6227,15 @@ term-size@^1.2.0:
   dependencies:
     execa "^0.7.0"
 
+terser@~3.17.0:
+  version "3.17.0"
+  resolved "https://registry.yarnpkg.com/terser/-/terser-3.17.0.tgz#f88ffbeda0deb5637f9d24b0da66f4e15ab10cb2"
+  integrity sha512-/FQzzPJmCpjAH9Xvk2paiWrFq+5M6aVOf+2KRbwhByISDX/EujxsK+BAvrhb6H+2rtrLCHK9N01wO014vrIwVQ==
+  dependencies:
+    commander "^2.19.0"
+    source-map "~0.6.1"
+    source-map-support "~0.5.10"
+
 test-exclude@^5.2.2:
   version "5.2.2"
   resolved "https://registry.yarnpkg.com/test-exclude/-/test-exclude-5.2.2.tgz#7322f8ab037b0b93ad2aab35fe9068baf997a4c4"
@@ -6475,7 +6477,7 @@ uglify-js@^2.7.5:
   optionalDependencies:
     uglify-to-browserify "~1.0.0"
 
-uglify-js@^3.1.4, uglify-js@~3.5.3:
+uglify-js@^3.1.4:
   version "3.5.7"
   resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.5.7.tgz#1442fda9991a01aa0eb2853876640477109113ff"
   integrity sha512-GCgJx3BBuaf/QMvBBkhoHDh4SVsHCC3ILEzriPw4FgJJKCuxVBSYLRkDlmT3uhXyGWKs3VN5r0mCkBIZaHWu3w==

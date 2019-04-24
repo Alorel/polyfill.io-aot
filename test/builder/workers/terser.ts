@@ -3,7 +3,7 @@ import * as fs from 'fs-extra';
 import {before, describe, it} from 'mocha';
 import {join} from 'path';
 import * as tmp from 'tmp';
-import {uglify} from '../../../packages/builder/src/workers/uglify-js';
+import {uglify} from '@polyfill-io-aot/builder/src/workers/terser';
 
 tmp.setGracefulCleanup();
 

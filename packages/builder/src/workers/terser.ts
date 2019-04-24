@@ -1,5 +1,5 @@
 import * as fs from 'fs';
-import * as UglifyJS from 'uglify-js';
+import * as Terser from 'terser';
 import * as wp from 'workerpool';
 import resolveSourcePath = require('./util/resolveSourcePath');
 
@@ -7,7 +7,7 @@ import resolveSourcePath = require('./util/resolveSourcePath');
 export function uglify(hash: string, rootDir: string) {
   const path = resolveSourcePath(rootDir, hash);
   const unminifiedContents: string = fs.readFileSync(path, 'utf8');
-  const result = UglifyJS.minify(unminifiedContents);
+  const result = Terser.minify(unminifiedContents);
 
   if (result.error) {
     throw result.error;
