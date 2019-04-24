@@ -1,3 +1,16 @@
+# [4.0.0](https://github.com/Alorel/polyfill.io-aot/compare/3.0.2...4.0.0) (2019-04-24)
+
+
+### Refactoring
+
+* Replaced UglifyJS with Terser ([#100](https://github.com/Alorel/polyfill.io-aot/issues/100)) ([d03b85a](https://github.com/Alorel/polyfill.io-aot/commit/d03b85a))
+* Use zlib instead of iltorb ([#99](https://github.com/Alorel/polyfill.io-aot/issues/99)) ([8f7d11e](https://github.com/Alorel/polyfill.io-aot/commit/8f7d11e))
+
+
+### BREAKING CHANGES
+
+* The library now requires Node >= 11.7.0
+
 ## [3.0.2](https://github.com/Alorel/polyfill.io-aot/compare/3.0.1...3.0.2) (2019-04-03)
 
 
