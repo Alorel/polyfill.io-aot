@@ -13,7 +13,7 @@
     "access": "public"
   },
   "peerDependencies": {
-    "polyfill-library": "^3.33.0"
+    "polyfill-library": "^3.34.0"
   },
   "keywords": [
     "polyfill",

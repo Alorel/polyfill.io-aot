@@ -81,7 +81,7 @@
     "node-zopfli-es": "~1.0.0",
     "nyc": "~14.0.0",
     "ora": "~3.4.0",
-    "polyfill-library": "~3.33.0",
+    "polyfill-library": "~3.34.0",
     "semantic-release": "~15.13.3",
     "source-map-support": "~0.5.10",
     "supertest": "~4.0.0",
@@ -110,7 +110,7 @@
     "lazy-get-decorator": "^2.2.0",
     "lodash": "^4.0.0",
     "node-zopfli-es": "^1.0.0",
-    "polyfill-library": "^3.33.0",
+    "polyfill-library": "^3.34.0",
     "tslib": "^1.6.0",
     "workerpool": "~3.2.0 || 3.1.1",
     "yargs": "^13.1.0"

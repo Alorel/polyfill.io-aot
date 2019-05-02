@@ -16,7 +16,7 @@
     "tslib": "^1.6.0"
   },
   "peerDependencies": {
-    "polyfill-library": "^3.33.0"
+    "polyfill-library": "^3.34.0"
   },
   "author": "Alorel <a.molcanovas@gmail.com> (https://github.com/Alorel)",
   "publishConfig": {
