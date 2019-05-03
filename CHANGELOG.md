@@ -1,3 +1,10 @@
+## [4.0.1](https://github.com/Alorel/polyfill.io-aot/compare/4.0.0...4.0.1) (2019-05-03)
+
+
+### Dependency updates
+
+* **package:** update [@types](https://github.com/types)/node to version 12.0.0 ([6dafaa0](https://github.com/Alorel/polyfill.io-aot/commit/6dafaa0))
+
 # [4.0.0](https://github.com/Alorel/polyfill.io-aot/compare/3.0.2...4.0.0) (2019-04-24)
 
 
