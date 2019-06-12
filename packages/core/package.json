@@ -13,7 +13,7 @@
     "lazy-get-decorator": "^2.2.0",
     "lodash": "^4.0.0",
     "moment-timezone": "~0.5.23",
-    "tslib": "^1.6.0"
+    "tslib": "^1.10.0"
   },
   "peerDependencies": {
     "polyfill-library": "^3.34.0"
