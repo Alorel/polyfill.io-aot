@@ -636,10 +636,10 @@
   resolved "https://registry.yarnpkg.com/@types/tmp/-/tmp-0.1.0.tgz#19cf73a7bcf641965485119726397a096f0049bd"
   integrity sha512-6IwZ9HzWbCq6XoQWhxLpDjuADodH/MKXRUIDFudvgjcVdjFknvmR+DNsoUeer4XPrEnrZs04Jj+kfV9pFsrhmA==
 
-"@types/workerpool@~2.3.0":
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/@types/workerpool/-/workerpool-2.3.0.tgz#2a011a742e415d98d4a9fc8d9adcff23166f8485"
-  integrity sha512-yHBg7WzxsaR9HnBf+yGHzsTHCot4GFmxrRNWOHhd8d64apWZV+LU/jiRvwQTZ9D4VB04zyV1NGJZdT+hu3yiPg==
+"@types/workerpool@~3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@types/workerpool/-/workerpool-3.1.0.tgz#8812ad37d73df86b6cf060fbe5697751361bb591"
+  integrity sha512-bJcLkk78Ng2H8dJbIfQu8STOTNZAEGFFz3DS8YMReHo4BDv3pn+HUd3r4/+lopsOmWS9QQb4OdvlpLAc+gaWrw==
   dependencies:
     "@types/node" "*"
 
