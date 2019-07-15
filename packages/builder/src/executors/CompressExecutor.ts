@@ -22,7 +22,7 @@ class CompressExecutor extends PoolExecutor {
     let te: Error;
 
     Bluebird
-      .map(this.builder[COMBO_HASHES], (hash: string) => {
+      .map(this.builder[COMBO_HASHES], (hash: string) => { //tslint:disable-line:no-floating-promises
         return Bluebird.all([this.makeZopfli(hash), this.makeBrotli(hash)])
           .then(noop);
       })
@@ -83,8 +83,8 @@ class CompressExecutor extends PoolExecutor {
 }
 
 /** @internal */
-module CompressExecutor {
-  export interface Stat {
+module CompressExecutor { //tslint:disable-line:completed-docs
+  export interface Stat { //tslint:disable-line:completed-docs
     readonly brotliComplete: number;
     readonly brotliTotal: number;
     readonly complete: number;

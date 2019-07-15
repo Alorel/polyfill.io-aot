@@ -1,6 +1,7 @@
 import {BrotliOptions} from 'zlib';
 import {PolyfillFlag, Unknown} from '../PolyfillLibrary';
 
+/** Base polyfill config */
 export interface PolyfillConfigBase {
   /**
    * Options to pass to the brotli encoder

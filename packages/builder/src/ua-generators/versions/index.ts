@@ -10,6 +10,8 @@ import saf = require('./safari');
 import _sam = require('./samsung');
 
 //tslint:disable:no-var-requires
+
+/** Lazy getters for polyfill version specs */
 export class Versions {
   @LazyGetter()
   public static get android(): typeof theSuperiorMobileOS {

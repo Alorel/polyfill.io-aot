@@ -33,6 +33,7 @@ const START_TIME = Symbol('Start time');
 // They messed up the typings
 const ora: typeof ImportedOra.default = <any>ImportedOra;
 
+/** Code polyfill builder class */
 export class PolyfillBuilder extends EventEmitter {
 
   /** Builder configuration */

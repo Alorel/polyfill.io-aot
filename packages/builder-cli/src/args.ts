@@ -6,8 +6,10 @@ import * as JSON5 from 'json5';
 import {join} from 'path';
 import * as yargs from 'yargs';
 
+/** Props ommitted from {@link PartialPolyfillBuilderConfig} */
 export type OmittedProps = 'uaGenerators' | 'outDir' | 'packageManager';
 
+/** Complete CLI config */
 export type CLIPolyfillBuilderConfig = Omit<PartialPolyfillBuilderConfig, OmittedProps> & {
   /** Maps to outDir */
   out?: string;
@@ -15,6 +17,7 @@ export type CLIPolyfillBuilderConfig = Omit<PartialPolyfillBuilderConfig, Omitte
   pkg?: PackageManager;
 };
 
+/** Complete CLI args */
 export type Args = CLIPolyfillBuilderConfig & {
   /** Path to config file */
   config?: PartialPolyfillBuilderConfig;
@@ -24,6 +27,7 @@ export type Args = CLIPolyfillBuilderConfig & {
 
 const json5Parse = (v: string): any => JSON5.parse(v);
 
+/** Yargs args definition */
 export const args: Args = <any>yargs
   .option('brotli', {
     alias: 'b',

@@ -1,5 +1,9 @@
+/** Events emitted by the builder */
 export enum BuildEvent {
+  //tslint:disable:completed-docs
+  /** Build errored */
   ERROR = 'error',
+  /** Build completed */
   END = 'end',
   COMPRESS_ALL_BEGIN = 'begin:compress:all',
   COMPRESS_ALL_OK = 'ok:compress:all',
@@ -45,6 +49,7 @@ export enum BuildEvent {
   FORMAT_DIR_OK = 'ok:format-dir',
   FORMAT_DIRS_BEGIN = 'begin:format-dirs',
   FORMAT_DIRS_OK = 'ok:format-dirs',
+  /** Build started */
   START = 'start',
   VALIDATE_DIRS_BEGIN = 'begin:validate-dirs',
   WRITE_MANIFEST_BEGIN = 'begin:write-manifest',
@@ -52,4 +57,5 @@ export enum BuildEvent {
   VALIDATE_DIRS_OK = 'ok:validate-dirs',
   VALIDATE_DIR_BEGIN = 'begin:validate-dir',
   VALIDATE_DIR_ERR = 'err:validate-dir'
+  //tslint:enable:completed-docs
 }

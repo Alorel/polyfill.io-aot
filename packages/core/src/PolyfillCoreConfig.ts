@@ -1,6 +1,7 @@
 import {PolyfillConfigBase} from '@polyfill-io-aot/common';
 import {ZlibOptions} from 'zlib';
 
+/** Core polyfill config */
 export interface PolyfillCoreConfig extends PolyfillConfigBase {
   /**
    * Options to pass to zlib.gzip when compressing non-bundled polyfills.

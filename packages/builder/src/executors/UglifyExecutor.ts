@@ -26,7 +26,7 @@ class UglifyExecutor extends PoolExecutor {
     this._initPool(require.resolve('../workers/terser'));
     let te: Error;
 
-    Bluebird
+    Bluebird //tslint:disable-line:no-floating-promises
       .map(this.builder[COMBO_HASHES], this.map.bind(this))
       .then(
         () => {

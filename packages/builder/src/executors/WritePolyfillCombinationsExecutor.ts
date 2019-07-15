@@ -12,7 +12,7 @@ class WritePolyfillCombinationsExecutor extends PoolExecutor {
   protected execute(): void {
     this._ora.start(`Creating empty output dir ${this.conf.outDir}`);
 
-    Bluebird.resolve(fs.emptyDir(this.conf.outDir))
+    Bluebird.resolve(fs.emptyDir(this.conf.outDir)) //tslint:disable-line:no-floating-promises
       .then(() => {
         this._initPool(require.resolve('../workers/polyfill-string-generator'));
         this._ora.text = 'Generating bundles';
