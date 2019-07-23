@@ -81,7 +81,7 @@
     "node-zopfli-es": "~1.0.0",
     "nyc": "~14.1.0",
     "ora": "~3.4.0",
-    "polyfill-library": "~3.35.0",
+    "polyfill-library": "~3.37.0",
     "semantic-release": "~15.13.3",
     "source-map-support": "~0.5.10",
     "supertest": "~4.0.0",
