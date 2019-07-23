@@ -110,7 +110,7 @@
     "lazy-get-decorator": "^2.2.0",
     "lodash": "^4.0.0",
     "node-zopfli-es": "^1.0.0",
-    "polyfill-library": "^3.35.0",
+    "polyfill-library": "^3.37.0",
     "tslib": "^1.10.0",
     "workerpool": "~3.2.0 || 3.1.1",
     "yargs": "^13.3.0"
