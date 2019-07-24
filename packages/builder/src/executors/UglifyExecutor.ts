@@ -24,18 +24,13 @@ class UglifyExecutor extends PoolExecutor {
     this._complete = 0;
     this._ora.start('Minifying compiled bundles');
     this._initPool(require.resolve('../workers/terser'));
-    let te: Error;
 
     Bluebird //tslint:disable-line:no-floating-promises
       .map(this.builder[COMBO_HASHES], this.map.bind(this))
       .then(
         () => {
+          this._ora.succeed(`Uglified ${this._complete} bundles`);
           this.emit(BuildEvent.UGLIFY_ALL_OK);
-          if (te) {
-            this._ora.warn(`Uglified ${this._complete} bundles with warning: ${this.formatError(te)}`);
-          } else {
-            this._ora.succeed(`Uglified ${this._complete} bundles`);
-          }
         },
         (e: Error) => {
           this._ora.fail(`Failed to uglify bundles: ${this.formatError(e)}`);

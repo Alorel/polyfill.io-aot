@@ -19,7 +19,6 @@ class CompressExecutor extends PoolExecutor {
     this._initPool(require.resolve('../workers/compress'));
     this[STAT] = new StatImpl(this.builder[COMBO_HASHES].length);
     this.emit(BuildEvent.COMPRESS_ALL_BEGIN, this[STAT]);
-    let te: Error;
 
     Bluebird
       .map(this.builder[COMBO_HASHES], (hash: string) => { //tslint:disable-line:no-floating-promises
@@ -28,11 +27,7 @@ class CompressExecutor extends PoolExecutor {
       })
       .then(
         () => {
-          if (te) {
-            this._ora.warn(`Polyfill bundles compressed with warning: ${this.formatError(te)}`);
-          } else {
-            this._ora.succeed('Polyfill bundles compressed');
-          }
+          this._ora.succeed('Polyfill bundles compressed');
           this.emit(BuildEvent.COMPRESS_ALL_OK, this[STAT]);
         },
         (e: Error) => {
