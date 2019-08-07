@@ -9,7 +9,6 @@ env:
 
 before_install:
   - npm install -g yarn greenkeeper-lockfile
-  - &prepKey if [[ $GH_TOKEN ]]; then ./prepare-gpg-key.sh; fi;
   - greenkeeper-lockfile-update
   - yarn run sync
 
@@ -39,7 +38,6 @@ jobs:
       node_js: stable
       before_install:
         - npm install -g yarn
-        - *prepKey
         - yarn run sync
       before_script:
         - yarn run tsc
