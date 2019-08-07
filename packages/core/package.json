@@ -1,11 +1,11 @@
 {
   "name": "@polyfill-io-aot/core",
-  "version": "4.0.4",
+  "version": "4.0.5",
   "license": "MIT",
   "repository": "git@github.com:Alorel/polyfill.io-aot.git",
   "main": "index.js",
   "dependencies": {
-    "@polyfill-io-aot/common": "4.0.4",
+    "@polyfill-io-aot/common": "4.0.5",
     "@types/moment-timezone": ">=0.5.0 <1.0.0",
     "@types/node": "~12.7.0",
     "etag": "~1.8.1",
