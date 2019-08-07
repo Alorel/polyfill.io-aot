@@ -101,7 +101,7 @@
   "peerDependencies": {
     "@types/express": "^4.17.0",
     "@types/moment-timezone": ">=0.5.0 <1.0.0",
-    "@types/node": "~12.6.3",
+    "@types/node": "~12.7.0",
     "@types/node-zopfli-es": ">=0.0.0 <1.0.0",
     "bluebird": "^3.0.0",
     "cross-spawn": "^6.0.0",
