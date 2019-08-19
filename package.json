@@ -113,6 +113,6 @@
     "polyfill-library": "^3.35.0",
     "tslib": "^1.10.0",
     "workerpool": "~3.2.0 || 3.1.1",
-    "yargs": "^13.3.0"
+    "yargs": "^14.0.0"
   }
 }
