@@ -22,7 +22,7 @@
     "ora": "~3.4.0",
     "terser": "~4.1.2",
     "tslib": "^1.10.0",
-    "workerpool": "~3.2.0 || 3.1.1"
+    "workerpool": "~5.0.0"
   },
   "peerDependencies": {
     "polyfill-library": "^3.35.0"
